@@ -24,3 +24,9 @@ Arbetspass 2:
 		datasignalen istället.
 	Har laddat ner datablad för MAX232, PIC och 78L05 och laddat upp dom till GitHub
 	
+Arbetspass 3:
+La in våra stegsvar i matlab och plottade dem över de uppmätta stegsvaren. Success!
+Skapade ett bodediagram för Gp och försökte hitta fasmarginal=50. Vi trodde att vi hade hittat den men vid simulation så såg vi att systemet
+självsvängde. Detta visade sig vara pga att vår Gk överföring hade en fasmarginal på 32 grader som ligger väldigt nära självsvängning/ostabilt
+system. 
+Vi började testa olika förstärkningar för att ta reda på åt vilket håll i ska gå. Nästa gång ska vi göra en ny regulator mha bode-metoden.
