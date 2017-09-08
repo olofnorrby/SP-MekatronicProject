@@ -13,4 +13,14 @@ Arbetspass 1:
 	
 	
 Arbetspass 2:
+	Betat av fram till 4c
+	Råkade sätta 78L05 åt fel håll först, då gav både ut- och in-signal 15V
+	Ritat kopplingsschema för PIC, MAX232, 78L05 samt MSCL-krets och kristall.
+	Kopplat upp alla dessa komponenter på kopplingsplattan.
+	Kopplat upp MAX232 mot 9-Pin DSUB och MAX232 mot PIC-processorn.
+	- Problematiskt att förstå vilka pinnar som var ingångar (Rx) och utgångar (Tx), det blev fel och vi fick hjälp av Göran som visade
+		hur man pingar tillbaka sända tecken för att felsöka (man kopplar ihop Rx och Tx från DSUBen).
+		Vi felsökte först all matningsspänning och kristallen, där allt var OK. Därför gick vi över till att felsöka
+		datasignalen istället.
+	Har laddat ner datablad för MAX232, PIC och 78L05 och laddat upp dom till GitHub
 	
