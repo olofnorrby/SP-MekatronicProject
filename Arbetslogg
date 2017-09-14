@@ -30,3 +30,18 @@ Skapade ett bodediagram för Gp och försökte hitta fasmarginal=50. Vi trodde a
 självsvängde. Detta visade sig vara pga att vår Gk överföring hade en fasmarginal på 32 grader som ligger väldigt nära självsvängning/ostabilt
 system. 
 Vi började testa olika förstärkningar för att ta reda på åt vilket håll i ska gå. Nästa gång ska vi göra en ny regulator mha bode-metoden.
+
+Olof o Johan:
+Kopplade upp 0-5V -> 0-10V OP amp samt räknade ut värden på gain-resistorer.
+Kopplade upp Börvärdes-potentiometern.
+Kopplade upp 10V -> 5V OP amp från nivågivare till PIC-processor.
+Räknade ut R och C för LP-filtret för DA-utgången som "smoothar ut" PWM-signalen till en analog signal.
+
+Arbetspass 4:
+Olof o Johan:
+Kopplat upp LCD-display.
+Lagt till kondensatorer till 78L05.
+Vändt kondensatorer runt MAX232-ICn åt rätt håll (derp).
+Skrivit men inte testat ett program som läser in en analog signal från en potentiometer på RB1 och översätter den till en PWM-signal
+på RA4.
+Utvecklat ett brinnande hat för datablad och register.
