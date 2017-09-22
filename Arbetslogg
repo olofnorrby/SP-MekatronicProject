@@ -45,3 +45,11 @@ Vändt kondensatorer runt MAX232-ICn åt rätt håll (derp).
 Skrivit men inte testat ett program som läser in en analog signal från en potentiometer på RB1 och översätter den till en PWM-signal
 på RA4.
 Utvecklat ett brinnande hat för datablad och register.
+
+Arbetspass 5:
+Johan o Olof:
+Skrev kod som anpassar en PWM-utsignal efter ett börvärde från en potentiometer.
+Kopplade upp så att man kan programmera PIC-processorn utan att behöva trycka på MSCL-knappen, detta genom att löda på en extra
+sladd på RTS-pinnen på DSUBen och koppla in denna i MSCL-kretsen enl. sista sidan i kompendiet.
+Skrev kod som skriver ut börvärdet (från en potentiometer) på LCD-skärmen i procent. Kodade även en design för hur börvärde ärvärde
+klocka och batterisymbol skulle vara placerade på LCD-skärmen.
