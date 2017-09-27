@@ -1,0 +1,879 @@
+%CMF
+# %PSECTS Section
+# For each object file, details of its psects are enumerated here.
+# The begining of the section is indicated by %PSECTS.  The first
+# line indicates the name of the first object file, e.g.
+#    $foo.obj
+# Each line that follows describes a psect in that object file, until
+# the next object file.  The lines that describe a psect have the
+# format:
+#    <psect name> <class name> <space> <link address> <load addresses> <length> <delta>
+# All addresses and the length are given in unqualified hexadecimal
+# in delta units.  Any other numeric values are decimal.
+%PSECTS
+$C:\Users\johfribe\AppData\Local\Temp\s5q0.obj
+end_init CODE 0 EE EE 4 1
+reset_vec CODE 0 0 0 4 1
+config CONFIG 0 300000 300000 8 1
+$dist/default/debug\C-kod.debug.obj
+intcode CODE 0 8 8 E6 1
+smallconst SMALLCONST 0 600 600 24 1
+text17 CODE 0 11C4 11C4 46 1
+text16 CODE 0 E00 E00 F8 1
+text15 CODE 0 BE4 BE4 11E 1
+text14 CODE 0 D02 D02 FE 1
+text13 CODE 0 1234 1234 2A 1
+text12 CODE 0 1104 1104 68 1
+text11 CODE 0 129E 129E 10 1
+text10 CODE 0 986 986 140 1
+text9 CODE 0 116C 116C 58 1
+text8 CODE 0 125E 125E 1A 1
+text7 CODE 0 12AE 12AE E 1
+text6 CODE 0 128E 128E 10 1
+text5 CODE 0 120A 120A 2A 1
+text4 CODE 0 EF8 EF8 D8 1
+text3 CODE 0 FD0 FD0 A4 1
+text2 CODE 0 1074 1074 90 1
+text1 CODE 0 AC6 AC6 11E 1
+text0 CODE 0 624 624 362 1
+cstackCOMRAM COMRAM 1 1 1 4B 1
+bssCOMRAM COMRAM 1 4C 4C 9 1
+cinit CODE 0 1278 1278 16 1
+# %UNUSED Section
+# This section enumerates the unused ranges of each CLASS. Each entry
+# is described on a single line as follows:
+#    <class name> <range> <delta>
+# Addresses given in the range are in hexadecimal and units of delta.
+%UNUSED
+BANK0 000060-0000FF 1
+BANK1 000100-0001FF 1
+BANK2 000200-0002FF 1
+BANK3 000300-0003FF 1
+BANK4 000400-0004FF 1
+BANK5 000500-0005FF 1
+BIGRAM 000055-0005FF 1
+CODE 000004-000007 1
+CODE 0000F2-0005FF 1
+CODE 0012BC-007D00 1
+COMRAM 000055-00005F 1
+CONFIG 300008-30000D 1
+CONST 000004-000007 1
+CONST 0000F2-0005FF 1
+CONST 0012BC-007D00 1
+EEDATA F00000-F000FF 1
+IDLOC 200000-200007 1
+MEDIUMCONST 0012BC-007D00 1
+RAM 000060-0005FF 1
+SFR 000F38-000FFF 1
+SMALLCONST 0012BC-007D00 1
+STACK 000060-0005FF 1
+# %LINETAB Section
+# This section enumerates the file/line to address mappings.
+# The beginning of the section is indicated by %LINETAB.
+# The first line indicates the name of the first object file, e.g.
+#   $foo.obj
+# Each line that follows describes a single mapping until the next
+# object file.  Mappings have the following format:
+#    <file name>:<line number> <address> <psect name> <class name>
+# The address is absolute and given given in unqualified hex 
+# in delta units of the psect. All mappings within an object file
+# are in ascending order of addresses.
+# All other numeric values are in decimal.
+%LINETAB
+$dist/default/debug\C-kod.debug.obj
+"Z:\Mekatronikprojekt\C-kod\main.c":262 8 intcode CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":265 8 intcode CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":266 40 intcode CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":267 46 intcode CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":268 4A intcode CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":269 4E intcode CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":270 5E intcode CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":271 66 intcode CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":272 6A intcode CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":273 7A intcode CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":274 82 intcode CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":275 92 intcode CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":276 9A intcode CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":277 AA intcode CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":281 B2 intcode CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":283 B4 intcode CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":41 624 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":45 624 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":47 628 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":48 62C text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":49 630 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":54 634 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":57 638 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":58 640 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":65 648 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":66 656 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":67 66E text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":68 674 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":69 678 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":70 68E text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":72 69C text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":77 6A0 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":80 6BC text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":81 6C2 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":82 6C8 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":83 6CE text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":85 6D2 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":86 6D6 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":87 6DC text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":88 6E2 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":91 6E6 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":96 6EE text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":97 746 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":98 74E text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":99 754 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":100 760 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":101 766 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":102 76E text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":103 770 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":104 778 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":105 77E text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":106 78A text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":107 790 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":108 7AA text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":109 7B0 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":113 7CA text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":114 822 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":115 82A text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":116 830 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":117 83C text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":118 842 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":119 84A text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":120 84C text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":121 854 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":122 85A text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":123 866 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":124 86C text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":125 886 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":126 88C text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":133 8A6 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":134 8AC text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":137 8B2 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":138 8B6 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":139 8BC text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":140 8C2 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":141 8C8 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":143 8CC text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":144 8D0 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":145 8D6 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":151 8DC text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":152 8F8 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":153 8FC text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":155 904 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":156 920 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":157 924 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":159 92C text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":160 948 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":161 950 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":164 958 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":165 95E text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":166 966 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":167 96E text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":170 976 text0 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":200 986 text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":202 986 text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":203 98C text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":204 992 text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":205 9AA text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":206 9B0 text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":204 9B6 text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":210 9BC text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":211 9C2 text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":212 9C8 text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":213 9E0 text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":214 9E8 text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":212 9EE text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":216 9F4 text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":217 A0C text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":218 A14 text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":216 A1A text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":222 A20 text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":223 A26 text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":224 A2C text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":225 A44 text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":226 A4C text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":224 A52 text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":228 A58 text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":229 A5E text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":233 A64 text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":234 A6A text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":235 A70 text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":236 A76 text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":237 A7C text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":238 A82 text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":239 A88 text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":240 A8E text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":241 A94 text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":242 A9A text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":243 AA0 text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":244 AA6 text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":245 AAC text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":246 AB2 text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":247 AB8 text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":248 ABE text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":251 AC4 text10 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":286 AC6 text1 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":287 AC6 text1 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":288 AC8 text1 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":289 AD0 text1 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":290 AD8 text1 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":291 AE8 text1 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":293 B02 text1 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":294 B02 text1 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":295 B08 text1 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":296 B10 text1 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":298 B18 text1 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":299 B18 text1 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":300 B1E text1 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":301 B26 text1 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":303 B2E text1 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":304 B2E text1 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":305 B34 text1 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":306 B3C text1 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":307 B44 text1 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":292 B46 text1 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":309 B6A text1 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":310 B7E text1 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":311 B84 text1 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":312 B8A text1 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":313 B90 text1 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":314 B98 text1 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":316 B9A text1 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":317 BA0 text1 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":318 BBC text1 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":319 BC2 text1 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":291 BDE text1 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fldiv.c":49 BE4 text15 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fldiv.c":55 BE4 text15 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fldiv.c":56 C0E text15 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fldiv.c":57 C20 text15 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fldiv.c":58 C4A text15 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fldiv.c":59 C5C text15 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fldiv.c":60 C62 text15 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fldiv.c":61 C66 text15 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fldiv.c":62 C6A text15 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fldiv.c":63 C6E text15 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fldiv.c":64 C70 text15 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fldiv.c":65 C80 text15 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fldiv.c":66 C82 text15 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fldiv.c":67 C92 text15 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fldiv.c":69 C96 text15 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fldiv.c":70 CA0 text15 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fldiv.c":71 CB4 text15 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fldiv.c":72 CC4 text15 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fldiv.c":74 CC6 text15 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fldiv.c":75 CD0 text15 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fldiv.c":76 CD4 text15 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fltol.c":43 D02 text14 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fltol.c":47 D02 text14 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fltol.c":48 D2C text14 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fltol.c":49 D3E text14 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fltol.c":50 D64 text14 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fltol.c":51 D66 text14 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fltol.c":52 D76 text14 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fltol.c":53 D7A text14 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fltol.c":54 D7E text14 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fltol.c":55 D8E text14 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fltol.c":57 DA0 text14 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fltol.c":58 DAA text14 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fltol.c":60 DB0 text14 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fltol.c":61 DB6 text14 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fltol.c":63 DC8 text14 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fltol.c":64 DD2 text14 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fltol.c":62 DD4 text14 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fltol.c":67 DD8 text14 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fltol.c":68 DDE text14 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\fltol.c":69 DEE text14 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\double.c":63 E00 text16 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\double.c":65 E00 text16 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\double.c":66 E12 text16 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\double.c":68 E24 text16 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\double.c":69 E26 text16 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\double.c":67 E30 text16 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\double.c":72 E56 text16 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\double.c":73 E58 text16 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\double.c":74 E64 text16 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\double.c":71 E6E text16 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\double.c":75 E6E text16 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\double.c":77 E94 text16 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\double.c":78 E96 text16 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\double.c":76 EA0 text16 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\double.c":80 EA4 text16 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\double.c":81 EA8 text16 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\double.c":82 EB8 text16 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\double.c":83 EBC text16 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\double.c":84 EE0 text16 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\double.c":85 EE4 text16 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\double.c":86 EE6 text16 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":100 EF8 text4 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":101 EF8 text4 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":102 EFA text4 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":103 EFC text4 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":104 F0A text4 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":105 F0C text4 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":106 F0E text4 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":107 F10 text4 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":108 F12 text4 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":109 F18 text4 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":110 F26 text4 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":111 F2C text4 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":112 F3A text4 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":113 F40 text4 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":114 F4E text4 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":115 F50 text4 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":116 F56 text4 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":117 F64 text4 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":118 F6A text4 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":119 F70 text4 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":120 F76 text4 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":122 F7A text4 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":123 F80 text4 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":124 F8C text4 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":125 F92 text4 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":126 F9E text4 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":127 FA4 text4 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":128 FAA text4 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":129 FB0 text4 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":130 FB6 text4 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":131 FBC text4 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":132 FC2 text4 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":133 FC8 text4 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":134 FCE text4 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awdiv.c":8 FD0 text3 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awdiv.c":14 FD0 text3 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awdiv.c":15 FD4 text3 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awdiv.c":16 FE8 text3 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awdiv.c":17 FF0 text3 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awdiv.c":19 FF4 text3 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awdiv.c":20 1008 text3 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awdiv.c":21 1010 text3 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awdiv.c":23 1014 text3 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awdiv.c":24 101C text3 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awdiv.c":25 1024 text3 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awdiv.c":26 1028 text3 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awdiv.c":27 102A text3 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awdiv.c":28 1030 text3 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awdiv.c":26 1032 text3 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awdiv.c":31 1036 text3 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awdiv.c":32 103C text3 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awdiv.c":33 1048 text3 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awdiv.c":34 1050 text3 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awdiv.c":36 1052 text3 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awdiv.c":37 1058 text3 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awdiv.c":39 105C text3 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awdiv.c":40 1062 text3 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awdiv.c":41 106A text3 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awmod.c":8 1074 text2 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awmod.c":13 1074 text2 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awmod.c":14 1078 text2 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awmod.c":15 108C text2 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awmod.c":16 1094 text2 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awmod.c":18 1098 text2 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awmod.c":19 10AC text2 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awmod.c":20 10B4 text2 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awmod.c":21 10BC text2 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awmod.c":22 10C0 text2 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awmod.c":23 10C2 text2 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awmod.c":24 10C8 text2 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awmod.c":22 10CA text2 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awmod.c":27 10CE text2 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awmod.c":28 10DA text2 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awmod.c":29 10E2 text2 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awmod.c":30 10E8 text2 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awmod.c":32 10EC text2 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awmod.c":33 10F2 text2 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awmod.c":34 10FA text2 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":40 1104 text12 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":41 1106 text12 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":42 1110 text12 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":43 111A text12 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":44 1124 text12 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":45 112E text12 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":46 1134 text12 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":47 113E text12 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":48 1148 text12 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":49 1152 text12 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":50 115C text12 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":51 1162 text12 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":52 116A text12 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":175 116C text9 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":177 116C text9 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":178 1172 text9 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":179 1178 text9 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":180 117E text9 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":181 1182 text9 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":182 1186 text9 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":183 118A text9 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":184 118C text9 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":185 1192 text9 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":186 1198 text9 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":187 119A text9 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":188 119E text9 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":189 11A2 text9 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":190 11A6 text9 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":191 11AA text9 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":192 11AE text9 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":193 11B2 text9 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":194 11B6 text9 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":195 11BA text9 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":196 11BE text9 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":197 11C2 text9 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":253 11C4 text17 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":255 11C6 text17 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":256 11CE text17 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":257 11E2 text17 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":258 11E8 text17 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":259 11EA text17 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":260 11EE text17 CODE
+"Z:\Mekatronikprojekt\C-kod\main.c":261 1200 text17 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":70 120A text5 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":71 120A text5 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":72 120C text5 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":71 1220 text5 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":73 1230 text5 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":71 1232 text5 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwtofl.c":28 1234 text13 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwtofl.c":30 1234 text13 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":61 125E text8 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":62 125E text8 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":63 1260 text8 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":64 1266 text8 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":65 1268 text8 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":66 1276 text8 CODE
+"C:\Users\johfribe\AppData\Local\Temp\s5q0.":1306 1278 cinit CODE
+"C:\Users\johfribe\AppData\Local\Temp\s5q0.":1308 1278 cinit CODE
+"C:\Users\johfribe\AppData\Local\Temp\s5q0.":1311 1278 cinit CODE
+"C:\Users\johfribe\AppData\Local\Temp\s5q0.":1334 1278 cinit CODE
+"C:\Users\johfribe\AppData\Local\Temp\s5q0.":1335 127C cinit CODE
+"C:\Users\johfribe\AppData\Local\Temp\s5q0.":1336 127E cinit CODE
+"C:\Users\johfribe\AppData\Local\Temp\s5q0.":1337 127E cinit CODE
+"C:\Users\johfribe\AppData\Local\Temp\s5q0.":1338 1280 cinit CODE
+"C:\Users\johfribe\AppData\Local\Temp\s5q0.":1339 1282 cinit CODE
+"C:\Users\johfribe\AppData\Local\Temp\s5q0.":1345 1284 cinit CODE
+"C:\Users\johfribe\AppData\Local\Temp\s5q0.":1347 1284 cinit CODE
+"C:\Users\johfribe\AppData\Local\Temp\s5q0.":1348 1286 cinit CODE
+"C:\Users\johfribe\AppData\Local\Temp\s5q0.":1349 1288 cinit CODE
+"C:\Users\johfribe\AppData\Local\Temp\s5q0.":1350 128A cinit CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":84 128E text6 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":85 1290 text6 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":86 1292 text6 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":87 129A text6 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":88 129C text6 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":53 129E text11 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":54 12A0 text11 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":55 12A2 text11 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":56 12AA text11 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":57 12AC text11 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":92 12AE text7 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":93 12B0 text7 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":94 12B2 text7 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":95 12B8 text7 CODE
+"Z:\Mekatronikprojekt\C-kod\lcd.c":96 12BA text7 CODE
+# %SYMTAB Section
+# An enumeration of all symbols in the program.
+# The beginning of the section is indicated by %SYMTAB.
+# Each line describes a single symbol as follows:
+#    <label> <value> [-]<load-adj> <class> <space> <psect> <file-name>
+# The value and load-adj are both in unqualified hexadecimal.
+# All other numeric values are in decimal.  The load-adj is the
+# quantity one needs to add to the symbol value in order to obtain the load
+# address of the symbol.  This value may be signed. If the symbol
+# was defined in a psect then <psect> will be "-". File-name
+# is the name of the object file in which the symbol was defined.
+%SYMTAB
+__CFG_XINST$OFF 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+___awdiv@counter 13 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+_lcd_writesc 120A 0 CODE 0 text5 dist/default/debug\C-kod.debug.obj
+_PR2 FBB 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__S0 300008 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__S1 55 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__S2 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__Hintentry 0 0 ABS 0 intentry dist/default/debug\C-kod.debug.obj
+__Lintentry 0 0 ABS 0 intentry dist/default/debug\C-kod.debug.obj
+__size_of_lcd_clear 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__CFG_PLLCFG$OFF 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__end_of___awdiv 1074 0 CODE 0 text3 dist/default/debug\C-kod.debug.obj
+_isr 8 0 CODE 0 intcode dist/default/debug\C-kod.debug.obj
+__size_of_lcd_write 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+_PIE1 F9D 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+_IPR1 F9F 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__end_of_init 11C4 0 CODE 0 text9 dist/default/debug\C-kod.debug.obj
+printTime@i 20 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+_main 624 0 CODE 0 text0 dist/default/debug\C-kod.debug.obj
+___sp 0 0 STACK 2 stack C:\Users\johfribe\AppData\Local\Temp\s5q0.obj
+_init 116C 0 CODE 0 text9 dist/default/debug\C-kod.debug.obj
+start EE 0 CODE 0 init C:\Users\johfribe\AppData\Local\Temp\s5q0.obj
+___fltol@f1 30 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+___fldiv@f1 1D 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+__size_of_lcd_writesc 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+_TMR1H FCF 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+_TMR1L FCE 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+_TRISA F92 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+_TRISB F93 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+_TRISC F94 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__Hirdata 0 0 CODE 0 irdata dist/default/debug\C-kod.debug.obj
+__Lirdata 0 0 CODE 0 irdata dist/default/debug\C-kod.debug.obj
+__HRAM 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__LRAM 1 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+_T1CON FCD 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+_T2CON FBA 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__size_of_printTime 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__size_of_init 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+___fldiv@f2 21 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+__Hconfig 300008 0 CONFIG 0 config dist/default/debug\C-kod.debug.obj
+__Lconfig 300000 0 CONFIG 0 config dist/default/debug\C-kod.debug.obj
+___flpack E00 0 CODE 0 text16 dist/default/debug\C-kod.debug.obj
+?___awmod F 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+___fldiv@f3 29 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+__Hbigram 0 0 ABS 0 bigram dist/default/debug\C-kod.debug.obj
+__Lbigram 0 0 ABS 0 bigram dist/default/debug\C-kod.debug.obj
+__Hrparam 0 0 ABS 0 rparam dist/default/debug\C-kod.debug.obj
+__Lrparam 0 0 ABS 0 rparam dist/default/debug\C-kod.debug.obj
+__Hram 0 0 ABS 0 ram dist/default/debug\C-kod.debug.obj
+__Lram 0 0 ABS 0 ram dist/default/debug\C-kod.debug.obj
+__Hcomram 0 0 ABS 0 comram dist/default/debug\C-kod.debug.obj
+__Lcomram 0 0 ABS 0 comram dist/default/debug\C-kod.debug.obj
+main@sensor_Val 3F 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+main@duty_LSB 42 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+__Hsfr 0 0 ABS 0 sfr dist/default/debug\C-kod.debug.obj
+__Lsfr 0 0 ABS 0 sfr dist/default/debug\C-kod.debug.obj
+__end_of__stringdata 623 0 SMALLCONST 0 smallconst dist/default/debug\C-kod.debug.obj
+_lcd_char 129E 0 CODE 0 text11 dist/default/debug\C-kod.debug.obj
+__size_of_isr 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__Hbss 0 0 RAM 1 bss dist/default/debug\C-kod.debug.obj
+__CFG_STVREN$ON 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__end_of_lcd_cmd 12BC 0 CODE 0 text7 dist/default/debug\C-kod.debug.obj
+__Lbss 0 0 RAM 1 bss dist/default/debug\C-kod.debug.obj
+__Hnvrram 0 0 COMRAM 1 nvrram dist/default/debug\C-kod.debug.obj
+__Lnvrram 0 0 COMRAM 1 nvrram dist/default/debug\C-kod.debug.obj
+__CFG_PWRTEN$ON 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+lcd_writesc@s 10 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+___lwtofl 1234 0 CODE 0 text13 dist/default/debug\C-kod.debug.obj
+___fldiv@cntr 2D 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+main@duty_MSB 41 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+_sekunder 4E 0 COMRAM 1 bssCOMRAM dist/default/debug\C-kod.debug.obj
+_ADCON0 FC2 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+_ADCON1 FC1 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+_ADCON2 FC0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+?___fltol 30 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+_create_char 986 0 CODE 0 text10 dist/default/debug\C-kod.debug.obj
+_PIE1bits F9D 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__Heeprom_data 0 0 EEDATA 0 eeprom_data dist/default/debug\C-kod.debug.obj
+__Leeprom_data 0 0 EEDATA 0 eeprom_data dist/default/debug\C-kod.debug.obj
+_PIR1bits F9E 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+_LATBbits F8A 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+_LATCbits F8B 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__Hintsave_regs 0 0 BIGRAM 1 intsave_regs dist/default/debug\C-kod.debug.obj
+__Lintsave_regs 0 0 BIGRAM 1 intsave_regs dist/default/debug\C-kod.debug.obj
+_ANSELA F38 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+?___fldiv 1D 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+_lcd_init EF8 0 CODE 0 text4 dist/default/debug\C-kod.debug.obj
+_ANSELB F39 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+_CCPR5L F55 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+_ANSELC F3A 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+_lcd_goto 128E 0 CODE 0 text6 dist/default/debug\C-kod.debug.obj
+__Hbigbss 0 0 BIGRAM 1 bigbss dist/default/debug\C-kod.debug.obj
+__Lbigbss 0 0 BIGRAM 1 bigbss dist/default/debug\C-kod.debug.obj
+?___awdiv F 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+__Hintret 0 0 ABS 0 intret dist/default/debug\C-kod.debug.obj
+__Lintret 0 0 ABS 0 intret dist/default/debug\C-kod.debug.obj
+__Hramtop 600 0 RAM 0 ramtop dist/default/debug\C-kod.debug.obj
+__Lramtop 600 0 RAM 0 ramtop dist/default/debug\C-kod.debug.obj
+__Hstruct 0 0 COMRAM 1 struct dist/default/debug\C-kod.debug.obj
+__Lstruct 0 0 COMRAM 1 struct dist/default/debug\C-kod.debug.obj
+__Hbigdata 0 0 BIGRAM 1 bigdata dist/default/debug\C-kod.debug.obj
+__end_of_AD_omv 120A 0 CODE 0 text17 dist/default/debug\C-kod.debug.obj
+__Lbigdata 0 0 BIGRAM 1 bigdata dist/default/debug\C-kod.debug.obj
+__Hmediumconst 0 0 MEDIUMCONST 0 mediumconst dist/default/debug\C-kod.debug.obj
+__Lmediumconst 0 0 MEDIUMCONST 0 mediumconst dist/default/debug\C-kod.debug.obj
+__Hfarbss 0 0 FARRAM 0 farbss dist/default/debug\C-kod.debug.obj
+__Lfarbss 0 0 FARRAM 0 farbss dist/default/debug\C-kod.debug.obj
+__Hintcode EE 0 CODE 0 intcode dist/default/debug\C-kod.debug.obj
+__Lintcode 8 0 CODE 0 intcode dist/default/debug\C-kod.debug.obj
+__Hfardata 0 0 FARRAM 0 fardata dist/default/debug\C-kod.debug.obj
+_ADRESH FC4 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__Lfardata 0 0 FARRAM 0 fardata dist/default/debug\C-kod.debug.obj
+__pintcode 8 0 CODE 0 intcode dist/default/debug\C-kod.debug.obj
+__Habs1 0 0 ABS 0 abs1 dist/default/debug\C-kod.debug.obj
+__Labs1 0 0 ABS 0 abs1 dist/default/debug\C-kod.debug.obj
+_ADRESL FC3 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+_INTCON FF2 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+_printTime AC6 0 CODE 0 text1 dist/default/debug\C-kod.debug.obj
+__HnvFARRAM 0 0 FARRAM 0 nvFARRAM dist/default/debug\C-kod.debug.obj
+__LnvFARRAM 0 0 FARRAM 0 nvFARRAM dist/default/debug\C-kod.debug.obj
+?___flpack F 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+__end_of___fltol E00 0 CODE 0 text14 dist/default/debug\C-kod.debug.obj
+__size_of___fldiv 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__end_of___awmod 1104 0 CODE 0 text2 dist/default/debug\C-kod.debug.obj
+__size_of_lcd_char 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__Hdata 0 0 ABS 0 data dist/default/debug\C-kod.debug.obj
+__Ldata 0 0 ABS 0 data dist/default/debug\C-kod.debug.obj
+stackhi 5FF 0 ABS 0 - C:\Users\johfribe\AppData\Local\Temp\s5q0.obj
+___awmod@sign 14 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+_lcd_write 1104 0 CODE 0 text12 dist/default/debug\C-kod.debug.obj
+_timmar 52 0 COMRAM 1 bssCOMRAM dist/default/debug\C-kod.debug.obj
+__Htemp 0 0 COMRAM 1 temp dist/default/debug\C-kod.debug.obj
+__Ltemp 0 0 COMRAM 1 temp dist/default/debug\C-kod.debug.obj
+stacklo 60 0 ABS 0 - C:\Users\johfribe\AppData\Local\Temp\s5q0.obj
+__Hrbit 0 0 COMRAM 1 rbit dist/default/debug\C-kod.debug.obj
+__Lrbit 0 0 COMRAM 1 rbit dist/default/debug\C-kod.debug.obj
+__Hinit EE 0 CODE 0 init dist/default/debug\C-kod.debug.obj
+printTime@pos1 1C 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+__Linit EE 0 CODE 0 init dist/default/debug\C-kod.debug.obj
+_lcd_clear 125E 0 CODE 0 text8 dist/default/debug\C-kod.debug.obj
+__Hintcodelo EE 0 CODE 0 intcodelo dist/default/debug\C-kod.debug.obj
+__Lintcodelo EE 0 CODE 0 intcodelo dist/default/debug\C-kod.debug.obj
+_AD_omv 11C4 0 CODE 0 text17 dist/default/debug\C-kod.debug.obj
+__Hrbss 0 0 COMRAM 1 rbss dist/default/debug\C-kod.debug.obj
+__end_of_main 986 0 CODE 0 text0 dist/default/debug\C-kod.debug.obj
+__size_of___lwtofl 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__Lrbss 0 0 COMRAM 1 rbss dist/default/debug\C-kod.debug.obj
+__Htext 0 0 ABS 0 text dist/default/debug\C-kod.debug.obj
+__Ltext 0 0 ABS 0 text dist/default/debug\C-kod.debug.obj
+__end_of___fldiv D02 0 CODE 0 text15 dist/default/debug\C-kod.debug.obj
+printTime@var 22 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+_time_scaler 50 0 COMRAM 1 bssCOMRAM dist/default/debug\C-kod.debug.obj
+?___lwtofl 19 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+__end_of___lwtofl 125E 0 CODE 0 text13 dist/default/debug\C-kod.debug.obj
+end_of_initialization 1284 0 CODE 0 cinit dist/default/debug\C-kod.debug.obj
+___fldiv@sign 2F 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+___awdiv@sign 14 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+__end_of_create_char AC6 0 CODE 0 text10 dist/default/debug\C-kod.debug.obj
+__end_of_lcd_char 12AE 0 CODE 0 text11 dist/default/debug\C-kod.debug.obj
+__CFG_FOSC$XT 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+create_char@i 11 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+_TRISAbits F92 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+_PORTBbits F81 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+_PORTCbits F82 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+main@character_code 3E 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+__Hibigdata 0 0 CODE 0 ibigdata dist/default/debug\C-kod.debug.obj
+__Libigdata 0 0 CODE 0 ibigdata dist/default/debug\C-kod.debug.obj
+__size_of_AD_omv 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+_CCP5CON F54 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__Hifardata 0 0 CODE 0 ifardata dist/default/debug\C-kod.debug.obj
+__Lifardata 0 0 CODE 0 ifardata dist/default/debug\C-kod.debug.obj
+__Hbank0 0 0 ABS 0 bank0 dist/default/debug\C-kod.debug.obj
+__Lbank0 0 0 ABS 0 bank0 dist/default/debug\C-kod.debug.obj
+__Hbank1 0 0 ABS 0 bank1 dist/default/debug\C-kod.debug.obj
+__Lbank1 0 0 ABS 0 bank1 dist/default/debug\C-kod.debug.obj
+__Hbank2 0 0 ABS 0 bank2 dist/default/debug\C-kod.debug.obj
+__Lbank2 0 0 ABS 0 bank2 dist/default/debug\C-kod.debug.obj
+__Hbank3 0 0 ABS 0 bank3 dist/default/debug\C-kod.debug.obj
+__Lbank3 0 0 ABS 0 bank3 dist/default/debug\C-kod.debug.obj
+___fldiv@exp 2E 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+__Hbank4 0 0 ABS 0 bank4 dist/default/debug\C-kod.debug.obj
+__Lbank4 0 0 ABS 0 bank4 dist/default/debug\C-kod.debug.obj
+__Hbank5 0 0 ABS 0 bank5 dist/default/debug\C-kod.debug.obj
+__Lbank5 0 0 ABS 0 bank5 dist/default/debug\C-kod.debug.obj
+__Hpowerup EE 0 CODE 0 powerup dist/default/debug\C-kod.debug.obj
+__Lpowerup EE 0 CODE 0 powerup dist/default/debug\C-kod.debug.obj
+__Htext0 0 0 ABS 0 text0 dist/default/debug\C-kod.debug.obj
+__Ltext0 0 0 ABS 0 text0 dist/default/debug\C-kod.debug.obj
+__Htext1 0 0 ABS 0 text1 dist/default/debug\C-kod.debug.obj
+__Ltext1 0 0 ABS 0 text1 dist/default/debug\C-kod.debug.obj
+__ptext0 624 0 CODE 0 text0 dist/default/debug\C-kod.debug.obj
+__Htext2 0 0 ABS 0 text2 dist/default/debug\C-kod.debug.obj
+__Ltext2 0 0 ABS 0 text2 dist/default/debug\C-kod.debug.obj
+__ptext1 AC6 0 CODE 0 text1 dist/default/debug\C-kod.debug.obj
+__Htext3 0 0 ABS 0 text3 dist/default/debug\C-kod.debug.obj
+__Ltext3 0 0 ABS 0 text3 dist/default/debug\C-kod.debug.obj
+__ptext2 1074 0 CODE 0 text2 dist/default/debug\C-kod.debug.obj
+__Htext4 0 0 ABS 0 text4 dist/default/debug\C-kod.debug.obj
+__Ltext4 0 0 ABS 0 text4 dist/default/debug\C-kod.debug.obj
+__ptext3 FD0 0 CODE 0 text3 dist/default/debug\C-kod.debug.obj
+__Htext5 0 0 ABS 0 text5 dist/default/debug\C-kod.debug.obj
+__Ltext5 0 0 ABS 0 text5 dist/default/debug\C-kod.debug.obj
+__ptext4 EF8 0 CODE 0 text4 dist/default/debug\C-kod.debug.obj
+__Htext6 0 0 ABS 0 text6 dist/default/debug\C-kod.debug.obj
+__Ltext6 0 0 ABS 0 text6 dist/default/debug\C-kod.debug.obj
+__ptext5 120A 0 CODE 0 text5 dist/default/debug\C-kod.debug.obj
+__Htext7 0 0 ABS 0 text7 dist/default/debug\C-kod.debug.obj
+__Ltext7 0 0 ABS 0 text7 dist/default/debug\C-kod.debug.obj
+__ptext6 128E 0 CODE 0 text6 dist/default/debug\C-kod.debug.obj
+__HbssCOMRAM 0 0 ABS 0 bssCOMRAM dist/default/debug\C-kod.debug.obj
+__LbssCOMRAM 0 0 ABS 0 bssCOMRAM dist/default/debug\C-kod.debug.obj
+__Htext8 0 0 ABS 0 text8 dist/default/debug\C-kod.debug.obj
+__Ltext8 0 0 ABS 0 text8 dist/default/debug\C-kod.debug.obj
+__ptext7 12AE 0 CODE 0 text7 dist/default/debug\C-kod.debug.obj
+__pbssCOMRAM 4C 0 COMRAM 1 bssCOMRAM dist/default/debug\C-kod.debug.obj
+__Htext9 0 0 ABS 0 text9 dist/default/debug\C-kod.debug.obj
+__Ltext9 0 0 ABS 0 text9 dist/default/debug\C-kod.debug.obj
+__ptext8 125E 0 CODE 0 text8 dist/default/debug\C-kod.debug.obj
+__ptext9 116C 0 CODE 0 text9 dist/default/debug\C-kod.debug.obj
+__size_of_lcd_init 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__size_of_lcd_goto 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__Hclrtext 0 0 ABS 0 clrtext dist/default/debug\C-kod.debug.obj
+__Lclrtext 0 0 ABS 0 clrtext dist/default/debug\C-kod.debug.obj
+printTime@pos2 1E 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+lcd_goto@pos 10 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+__end_of__initialization 1284 0 CODE 0 cinit dist/default/debug\C-kod.debug.obj
+__end_of_lcd_clear 1278 0 CODE 0 text8 dist/default/debug\C-kod.debug.obj
+__CFG_PRICLKEN$ON 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__end_of_lcd_goto 129E 0 CODE 0 text6 dist/default/debug\C-kod.debug.obj
+main@tid 4A 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+__Hidata 0 0 CODE 0 idata dist/default/debug\C-kod.debug.obj
+__end_of___flpack EF8 0 CODE 0 text16 dist/default/debug\C-kod.debug.obj
+_lcd_cmd 12AE 0 CODE 0 text7 dist/default/debug\C-kod.debug.obj
+__Lidata 0 0 CODE 0 idata dist/default/debug\C-kod.debug.obj
+__Hrdata 0 0 COMRAM 1 rdata dist/default/debug\C-kod.debug.obj
+__Lrdata 0 0 COMRAM 1 rdata dist/default/debug\C-kod.debug.obj
+__Hidloc 0 0 IDLOC 0 idloc dist/default/debug\C-kod.debug.obj
+__Lidloc 0 0 IDLOC 0 idloc dist/default/debug\C-kod.debug.obj
+__Hstack 0 0 STACK 2 stack dist/default/debug\C-kod.debug.obj
+__Lstack 0 0 STACK 2 stack dist/default/debug\C-kod.debug.obj
+___awmod 1074 0 CODE 0 text2 dist/default/debug\C-kod.debug.obj
+__Hparam 0 0 ABS 0 rparam dist/default/debug\C-kod.debug.obj
+__Lparam 0 0 ABS 0 rparam dist/default/debug\C-kod.debug.obj
+__Hspace_0 300008 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__HcstackCOMRAM 0 0 ABS 0 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+__Lspace_0 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__LcstackCOMRAM 0 0 ABS 0 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+___flpack@sign 14 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+__end_of_isr EE 0 CODE 0 intcode dist/default/debug\C-kod.debug.obj
+__pcstackCOMRAM 1 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+__Hspace_1 55 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__Lspace_1 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__Hsmallconst 624 0 SMALLCONST 0 smallconst dist/default/debug\C-kod.debug.obj
+__Lsmallconst 600 0 SMALLCONST 0 smallconst dist/default/debug\C-kod.debug.obj
+printTime@sekunder 1B 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+__psmallconst 600 0 SMALLCONST 0 smallconst dist/default/debug\C-kod.debug.obj
+___fltol D02 0 CODE 0 text14 dist/default/debug\C-kod.debug.obj
+__Hspace_2 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__Lspace_2 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__Hnvbit 0 0 COMRAM 1 nvbit dist/default/debug\C-kod.debug.obj
+__Lnvbit 0 0 COMRAM 1 nvbit dist/default/debug\C-kod.debug.obj
+__Hcinit 0 0 ABS 0 cinit dist/default/debug\C-kod.debug.obj
+__Lcinit 0 0 ABS 0 cinit dist/default/debug\C-kod.debug.obj
+?_AD_omv F 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+___fldiv BE4 0 CODE 0 text15 dist/default/debug\C-kod.debug.obj
+_minuter 4C 0 COMRAM 1 bssCOMRAM dist/default/debug\C-kod.debug.obj
+__pcinit 1278 0 CODE 0 cinit dist/default/debug\C-kod.debug.obj
+___awdiv FD0 0 CODE 0 text3 dist/default/debug\C-kod.debug.obj
+__ramtop 600 0 RAM 0 ramtop C:\Users\johfribe\AppData\Local\Temp\s5q0.obj
+__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\johfribe\AppData\Local\Temp\s5q0.obj
+__size_of_main 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__Hconst 0 0 CODE 0 const dist/default/debug\C-kod.debug.obj
+__Lconst 0 0 CODE 0 const dist/default/debug\C-kod.debug.obj
+main@rampknapp_flag 43 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+lcd_char@cgram_addr 10 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+___fltol@exp1 39 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+printTime@minuter 17 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+__CFG_DEBUG$OFF 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+___flpack@arg F 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+AD_omv@ADkanal 15 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+AD_omv@AD_value 13 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+__CFG_MCLRE$EXTMCLR 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__CFG_FCMEN$OFF 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__Htext10 0 0 ABS 0 text10 dist/default/debug\C-kod.debug.obj
+__Ltext10 0 0 ABS 0 text10 dist/default/debug\C-kod.debug.obj
+__ptext10 986 0 CODE 0 text10 dist/default/debug\C-kod.debug.obj
+__Htext11 0 0 ABS 0 text11 dist/default/debug\C-kod.debug.obj
+__Ltext11 0 0 ABS 0 text11 dist/default/debug\C-kod.debug.obj
+__ptext11 129E 0 CODE 0 text11 dist/default/debug\C-kod.debug.obj
+_CCPTMRS1 F48 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__Htext12 0 0 ABS 0 text12 dist/default/debug\C-kod.debug.obj
+__Ltext12 0 0 ABS 0 text12 dist/default/debug\C-kod.debug.obj
+__size_of_lcd_cmd 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__ptext12 1104 0 CODE 0 text12 dist/default/debug\C-kod.debug.obj
+__Htext13 0 0 ABS 0 text13 dist/default/debug\C-kod.debug.obj
+__Ltext13 0 0 ABS 0 text13 dist/default/debug\C-kod.debug.obj
+__ptext13 1234 0 CODE 0 text13 dist/default/debug\C-kod.debug.obj
+_ADCON0bits FC2 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__Htext14 0 0 ABS 0 text14 dist/default/debug\C-kod.debug.obj
+__Ltext14 0 0 ABS 0 text14 dist/default/debug\C-kod.debug.obj
+__size_of___awdiv 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__ptext14 D02 0 CODE 0 text14 dist/default/debug\C-kod.debug.obj
+__Htext15 0 0 ABS 0 text15 dist/default/debug\C-kod.debug.obj
+__Ltext15 0 0 ABS 0 text15 dist/default/debug\C-kod.debug.obj
+__ptext15 BE4 0 CODE 0 text15 dist/default/debug\C-kod.debug.obj
+printTime@timmar 18 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+___inthi_sp 0 0 STACK 2 stack C:\Users\johfribe\AppData\Local\Temp\s5q0.obj
+__Htext16 0 0 ABS 0 text16 dist/default/debug\C-kod.debug.obj
+__Ltext16 0 0 ABS 0 text16 dist/default/debug\C-kod.debug.obj
+__ptext16 E00 0 CODE 0 text16 dist/default/debug\C-kod.debug.obj
+__Htext17 0 0 ABS 0 text17 dist/default/debug\C-kod.debug.obj
+main@act_Val 49 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+__Ltext17 0 0 ABS 0 text17 dist/default/debug\C-kod.debug.obj
+__CFG_BOREN$OFF 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__ptext17 11C4 0 CODE 0 text17 dist/default/debug\C-kod.debug.obj
+___awmod@divisor 11 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+___fltol@sign1 38 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+__CFG_WDTEN$OFF 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+main@set_Val 48 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+___intlo_sp 0 0 STACK 2 stack C:\Users\johfribe\AppData\Local\Temp\s5q0.obj
+__end_of_lcd_write 116C 0 CODE 0 text12 dist/default/debug\C-kod.debug.obj
+_blink_battery 54 0 COMRAM 1 bssCOMRAM dist/default/debug\C-kod.debug.obj
+main@pot_Val 44 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+__Hend_init F2 0 CODE 0 end_init dist/default/debug\C-kod.debug.obj
+__Lend_init EE 0 CODE 0 end_init dist/default/debug\C-kod.debug.obj
+___flpack@exp 13 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+___awdiv@divisor 11 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+__end_of_lcd_writesc 1234 0 CODE 0 text5 dist/default/debug\C-kod.debug.obj
+__end_of_printTime BE4 0 CODE 0 text1 dist/default/debug\C-kod.debug.obj
+__smallconst 600 0 SMALLCONST 0 smallconst C:\Users\johfribe\AppData\Local\Temp\s5q0.obj
+__Hreset_vec 4 0 CODE 0 reset_vec dist/default/debug\C-kod.debug.obj
+__Lreset_vec 0 0 CODE 0 reset_vec dist/default/debug\C-kod.debug.obj
+__stringdata 601 0 SMALLCONST 0 smallconst dist/default/debug\C-kod.debug.obj
+__accesstop 60 0 ABS 0 - C:\Users\johfribe\AppData\Local\Temp\s5q0.obj
+__Hintcode_body 0 0 ABS 0 intcode_body dist/default/debug\C-kod.debug.obj
+__Lintcode_body 0 0 ABS 0 intcode_body dist/default/debug\C-kod.debug.obj
+intlevel0 0 0 CODE 0 text C:\Users\johfribe\AppData\Local\Temp\s5q0.obj
+intlevel1 0 0 CODE 0 text C:\Users\johfribe\AppData\Local\Temp\s5q0.obj
+intlevel2 0 0 CODE 0 text C:\Users\johfribe\AppData\Local\Temp\s5q0.obj
+intlevel3 0 0 CODE 0 text C:\Users\johfribe\AppData\Local\Temp\s5q0.obj
+lcd_cmd@command 10 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+main@tid_old 46 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+__size_of___flpack 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__size_of___fltol 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__CFG_HFOFST$OFF 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+start_initialization 1278 0 CODE 0 cinit dist/default/debug\C-kod.debug.obj
+___awdiv@quotient 15 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+__CFG_IESO$OFF 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__size_of___awmod 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+__initialization 1278 0 CODE 0 cinit dist/default/debug\C-kod.debug.obj
+lcd_write@c F 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+__end_of_lcd_init FD0 0 CODE 0 text4 dist/default/debug\C-kod.debug.obj
+___awmod@dividend F 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+__activetblptr 2 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+___lwtofl@c 19 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+___awmod@counter 13 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+__CFG_LVP$OFF 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+create_char@i_611 13 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+create_char@i_612 15 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+create_char@i_613 17 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+__size_of_create_char 0 0 ABS 0 - dist/default/debug\C-kod.debug.obj
+___awdiv@dividend F 0 COMRAM 1 cstackCOMRAM dist/default/debug\C-kod.debug.obj
+# %SPLITSTAB Section
+# This section enumerates all the psect splits performed by the assembler.
+# The beginning of the section is indicated by %SPLITSTAB.
+# Each line is a record a particular split, where the parent psect in on
+# the left and the child on the right.  Note that a child psect is always
+# split form the top of the parent psect. All splits from a given parent
+# are listed in the order in which they occurred.
+%SPLITSTAB
+# %DABS Section
+# This section contains a table of all usuage of the assember
+# directive DABS in the program. Each line has the following format:
+#   <name> <space> <address> <size>
+# If the DABS was originally labelled then that shall be <name>,
+# otherwise name will be "-".  The <space> number is in decimal.
+# <address> and <size> are in byte units as unqaulified hexadecimal
+%DABS
+# %SEGMENTS Section
+# This sections enumerates the segments of the program.  Each segment
+# is described on a single line as follows:
+#    <name> <space> <link address> <file address> <size> <delta>
+# Addresses and size are in unqualified hexadecimal.  The link address
+# and size are in units of delta. The file address is in units of bytes.
+# All other numeric quantities are in decimal.
+%SEGMENTS
+reset_vec 0 0 0 4 1
+intcode 0 8 8 EA 1
+smallconst 0 600 600 24 1
+config 0 300000 300000 8 1
+cstackCOMRAM 1 1 1 54 1
+text0 0 624 624 C98 1
