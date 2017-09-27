@@ -53,3 +53,12 @@ Kopplade upp så att man kan programmera PIC-processorn utan att behöva trycka 
 sladd på RTS-pinnen på DSUBen och koppla in denna i MSCL-kretsen enl. sista sidan i kompendiet.
 Skrev kod som skriver ut börvärdet (från en potentiometer) på LCD-skärmen i procent. Kodade även en design för hur börvärde ärvärde
 klocka och batterisymbol skulle vara placerade på LCD-skärmen.
+
+Arbetspass 6 (Extra):
+Johan o Olof:
+Skrivit kod för "kristall-klockan" som går på timer 1, 1mhz. Fick kompensera för delayer i koden osv så delayen vi anv i slutändan var 0.05 sec.
+Skrivit kod för 3 olika egna symboler (rampfunktion, battery low (2st olika symboler) Battery Full).
+Fixat blinkfunktion för low battery mha. interupten
+Knapp kopplat till rampsymbolen
+fixat funktionen som nollställer hela klockan.
+AD omv för RB0 aka sensor fixat och testad. (glömde sätta i nollan för testet ^^)
