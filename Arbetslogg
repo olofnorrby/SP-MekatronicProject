@@ -62,3 +62,9 @@ Fixat blinkfunktion för low battery mha. interupten
 Knapp kopplat till rampsymbolen
 fixat funktionen som nollställer hela klockan.
 AD omv för RB0 aka sensor fixat och testad. (glömde sätta i nollan för testet ^^)
+
+Arbetspass 7:
+Olof och Johan:
+LCD helt klar. Rampfunktion och batteristatus fungerar perfekt och den visar ett "S: X%" där X är det stegande börvärdet (bör bytas namn
+på "S" kanske)
+Påbörjat kod för seriell kommunikation med MatLab
