@@ -31,11 +31,17 @@ int AD_omv(char ADkanal);
 void interrupt isr(void);
 void printTime(char sekunder, char minuter, char timmar);
 void create_char(void);
-unsigned int time_scaler=0;
-unsigned int timmar=0;
-unsigned int minuter=0;
-unsigned int sekunder=0;
-unsigned char blink_battery = 0;
+
+    unsigned int time_scaler=0;
+    unsigned int timmar=0;
+    unsigned int minuter=0;
+    unsigned int sekunder=0;
+    unsigned char blink_battery = 0;
+    unsigned int styrsignal = 0;
+    unsigned int ramp_multiplier = 1;
+    unsigned char set_Val; //Börvärdet ("set") i procent, visas på LCDn och beseras på potentiometer
+    unsigned char act_Val; //Ärvärdet ("actual") i procent, visas på LCDn och baseras på nivågivare
+    bool rampknapp_flag = 0; //
 
 //Huvudprogram----------------------------------------------------------------
 void main()
@@ -51,13 +57,12 @@ void main()
     unsigned char duty_MSB, duty_LSB;
     unsigned int pot_Val; //Börvärde direkt från potentiometer
     unsigned int sensor_Val; //Ärvärdet direkt från nivågivare
-    bool rampknapp_flag = 0; //
-    char set_Val; //Börvärdet ("set") i procent, visas på LCDn och beseras på potentiometer
-    char act_Val; //Ärvärdet ("actual") i procent, visas på LCDn och baseras på nivågivare
     unsigned int tid = 0; //Tid som gått i mikrosekunder;
     unsigned int tid_old = 0; //Tid vid senaste registrerade aktivering av rampknappen (Förhindrar fladder)
- 
+    bool battery_status = 1; //1: Batteri V >= 12V. 0: Batteri V < 12V
+    char variabel = 0;
 
+ 
     while(1) //Huvudloop
     {
         //PWM ----------------------------------------------------------------
@@ -71,24 +76,26 @@ void main()
         __delay_us(0.5);
         tid += 1;
         
+        //Skriva 8-MSB till TXREG1
+        variabel = sensor_Val>>2;
+        TXREG1 = variabel;
 
         //Rampfunktion -------------------------------------------------------
         
         if(Ramp_knapp && tid >= (tid_old+50)) {
 
             //Skriver ut rampsymbol till Display
-            if(rampknapp_flag == 1){
-                lcd_goto(0x4F);
-                lcd_write(0x03);
-                rampknapp_flag = 0;
-            }
-            else if(rampknapp_flag == 0){
-                lcd_goto(0x4F);
-                lcd_write(0x20);
-                rampknapp_flag = 1;
-            }
+            rampknapp_flag = ~rampknapp_flag;
 
             tid_old = tid;
+        }
+        if(rampknapp_flag == 0xFF){
+            lcd_goto(0x4E);
+            lcd_write(0x03);
+        }
+        if(rampknapp_flag == 0){
+            lcd_goto(0x4E);
+            lcd_write(0x20);
         }
         
         //LCD ----------------------------------------------------------------
@@ -130,20 +137,44 @@ void main()
         //Skriva egna tecken -------------------------------------------------
 
         //Battery full
-        lcd_goto(0x4D);
-        lcd_write(0x00);
+        if(CM1CON0bits.C1OUT == 0) {
+            lcd_goto(0x4F);
+            lcd_write(0x00);
+        }
 
         //Battery low ***********
-        if(blink_battery%2 == 1){
-            lcd_goto(0x4E);
-            lcd_write(0x01);
-            if(blink_battery >10)
-                blink_battery = 1;
+        if(CM1CON0bits.C1OUT == 1) {
+            if(blink_battery%2 == 1){
+                lcd_goto(0x4F);
+                lcd_write(0x01);
+                if(blink_battery >10)
+                    blink_battery = 1;
+            }
+            if(blink_battery%2 == 0){
+                lcd_goto(0x4F);
+                lcd_write(0x02);
+            }
         }
-        if(blink_battery%2 == 0){
-            lcd_goto(0x4E);
-            lcd_write(0x02);
+
+       //Styrvärde
+        if(rampknapp_flag == 0){
+            styrsignal = set_Val;
         }
+
+        if(styrsignal < 10) {
+            lcd_goto(0x4A);
+            lcd_writesc(" ");
+            lcd_goto(0x4B);
+            lcd_write(0x30+styrsignal);
+        }
+        else if(styrsignal < 100) {
+            lcd_goto(0x4A);
+            lcd_writesc(" ");
+            lcd_goto(0x4A);
+            lcd_write(0x30+(styrsignal/10));
+            lcd_goto(0x4B);
+            lcd_write(0x30+(styrsignal%10));
+        } 
 
 
 
@@ -191,9 +222,18 @@ void init()
     PIE1=0x1;   //TMR1 interupt enabled
     IPR1=0x1;   //TMR1 interup High priority
     INTCON=0xC0;//Global/Peripheral interupt enable
-    ADCON0=0b0101001; //Channel: AN10, GO/DONE = 0, ADON = 1
+    ADCON0=0b0101001; //GO/DONE = 0, ADON = 1
     ADCON1=0b00000000; //TRIGSEL: CCP5, Vref+: AVdd, Vref-: AVss
     ADCON2=0b10100100; //Högerjusterad, ACQT: 8 Tad, ADCS: Fosc/4
+    CM1CON0=0b10001100; //C1ON=Enabled, C1OUT=internal
+                        //Speed=Normal, C1R=C1Cin+, C1CH=C12IN0-
+    CM2CON1=0b00100000; //C1RSEL=FVR BUF1
+    VREFCON0=0xF0; //Enabled, Fixed Reference = 4.096V, Flag = 1 (ready to use)
+    TXSTA1 = 0b00100000; //Asynkron, Low Speed, Transmit Enabled
+    RCSTA1 = 0b10000000; //Serial Port Enabled
+    BAUDCON1 = 0b00001000; //BRG16 = 16-bit
+    SPBRG1 = 0; //LSB av 19200 (Baudrate)
+    SPBRGH1 = 0b01001011; //HSB av 19200 (Baudrate)
 }
 
 //Skapar nya symboler ----------------------------------------------------------
@@ -269,6 +309,15 @@ void interrupt isr(void){
         if(++time_scaler>=20){ //Prescalear om tid så delay blir 1 sec
             time_scaler = 0;
             blink_battery = blink_battery + 1; //Blinktimer för "low battery"
+            if(rampknapp_flag == 0xFF && (styrsignal< set_Val)){
+                styrsignal += ramp_multiplier;
+            }
+            if(rampknapp_flag == 0xFF && (styrsignal> set_Val)){
+                styrsignal -= ramp_multiplier;
+            }
+            if(rampknapp_flag == 0xFF && (styrsignal == set_Val)){
+                styrsignal = styrsignal;
+            }
             if(++sekunder>=60){ //Räkna sekunder
                 sekunder = 0;
                 if(++minuter>=60){//Räkna minuter
