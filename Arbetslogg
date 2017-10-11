@@ -68,3 +68,21 @@ Olof och Johan:
 LCD helt klar. Rampfunktion och batteristatus fungerar perfekt och den visar ett "S: X%" där X är det stegande börvärdet (bör bytas namn
 på "S" kanske)
 Påbörjat kod för seriell kommunikation med MatLab
+
+Arbetspass 8:
+Olof och Johan:
+Kod för seriell kommunikation med matlab klar. lite problem med att ställa in rätt baudrate(19200) för 4MHz, fick ändra lite i 3 register för
+att lösa problemet. 
+Implementera samplingsinervall på 0,8 sek för differensekv.
+skrev kod för PI regulatorn, fick begränsa styrsignalerna så dem inte stack iväg på stora och stort negativa tal. Samt overflow problem.
+
+Arbetspass 9:
+Olof och Johan:
+Finslipade koden för regulatorn efter test på tankprocessen. 
+Problem med implementering av rampfunktion, men verkade lösa sig hyfsat bra efter lite pillande i koden.
+Testade på systemet och det sköter sig typ efter förväntningar.
+
+Arbetspass 10:
+Olof och Johan:
+Började med KiCad modellen och rapporten.
+
