@@ -122,7 +122,7 @@ void lcd_init(void)
         lcd_goto(0);				// Select first line position 0
         lcd_writesc("b r:  % 00:00:00");
         lcd_goto(0x40);
-        lcd_writesc(" r:   %         ");
+        lcd_writesc(" r:   % R:  %  ");
         lcd_goto(0x01);
         lcd_write(0xEF);
         lcd_goto(0x40);

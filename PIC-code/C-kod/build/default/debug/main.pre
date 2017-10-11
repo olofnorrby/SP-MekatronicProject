@@ -10034,11 +10034,21 @@ int AD_omv(char ADkanal);
 void interrupt isr(void);
 void printTime(char sekunder, char minuter, char timmar);
 void create_char(void);
+
 unsigned int time_scaler=0;
 unsigned int timmar=0;
 unsigned int minuter=0;
 unsigned int sekunder=0;
 unsigned char blink_battery = 0;
+unsigned int styrsignal = 0;
+unsigned int rampsignal = 0;
+unsigned char set_Val = 0;
+unsigned char act_Val = 0;
+bool rampknapp_flag = 0;
+unsigned int sample_flag = 0;
+unsigned char sample_interval = 0;
+unsigned int pot_Val = 0;
+unsigned char ramptime_scaler = 0;
 
 
 void main()
@@ -10052,22 +10062,37 @@ lcd_init();
 create_char();
 
 unsigned char duty_MSB, duty_LSB;
-unsigned int pot_Val;
 unsigned int sensor_Val;
-bool rampknapp_flag = 0;
-char set_Val;
-char act_Val;
 unsigned int tid = 0;
 unsigned int tid_old = 0;
+bool battery_status = 1;
+char variabel = 0;
+int res_error1 = 0;
+int res_error2 = 0;
+double pump_signal1 = 0;
+double pump_signal2 = 0;
+unsigned char disp_rampsignal = 0;
 
 
 while(1)
 {
 
-
+styrsignal = (int)pump_signal1;
+if(styrsignal >=1023){
+styrsignal = 1023;
+}
+if(pump_signal1 <= -1023){
+pump_signal1 = -1023;
+}
+if(pump_signal1 >= 1023){
+pump_signal1 = 1023;
+}
+if(pump_signal1 < 0){
+styrsignal += (int)pump_signal1;
+}
 pot_Val = AD_omv(10);
-duty_MSB = pot_Val>>2;
-duty_LSB = pot_Val & 0x0003;
+duty_MSB = styrsignal>>2;
+duty_LSB = styrsignal & 0x0003;
 CCPR5L = duty_MSB;
 CCP5CON = (CCP5CON & 0b11001111)|(duty_LSB <<4);
 sensor_Val = AD_omv(12);
@@ -10075,23 +10100,34 @@ _delay((unsigned long)((0.5)*(4000000/4000000.0)));
 tid += 1;
 
 
+variabel = sensor_Val>>2;
+TXREG1 = variabel;
 
 
+
+if(sample_flag == 1){
+pump_signal2 = pump_signal1;
+res_error2 = res_error1;
+res_error1 = rampsignal - sensor_Val;
+pump_signal1=2.298*res_error1 - 2.266*res_error2 + pump_signal2;
+sample_flag = 0;
+}
+
+# 117
 if(PORTCbits.RC1 && tid >= (tid_old+50)) {
 
 
-if(rampknapp_flag == 1){
-lcd_goto(0x4F);
-lcd_write(0x03);
-rampknapp_flag = 0;
-}
-else if(rampknapp_flag == 0){
-lcd_goto(0x4F);
-lcd_write(0x20);
-rampknapp_flag = 1;
-}
+rampknapp_flag = ~rampknapp_flag;
 
 tid_old = tid;
+}
+if(rampknapp_flag == 0xFF){
+lcd_goto(0x4E);
+lcd_write(0x03);
+}
+if(rampknapp_flag == 0){
+lcd_goto(0x4E);
+lcd_write(0x20);
 }
 
 
@@ -10129,20 +10165,44 @@ lcd_goto(0x45);
 lcd_write(0x30+(act_Val%10));
 }
 
-# 133
-lcd_goto(0x4D);
+# 172
+if(CM1CON0bits.C1OUT == 0) {
+lcd_goto(0x4F);
 lcd_write(0x00);
+}
 
 
+if(CM1CON0bits.C1OUT == 1) {
 if(blink_battery%2 == 1){
-lcd_goto(0x4E);
+lcd_goto(0x4F);
 lcd_write(0x01);
 if(blink_battery >10)
 blink_battery = 1;
 }
 if(blink_battery%2 == 0){
-lcd_goto(0x4E);
+lcd_goto(0x4F);
 lcd_write(0x02);
+}
+}
+
+
+if(rampknapp_flag == 0){
+rampsignal = pot_Val;
+}
+disp_rampsignal = (char)(rampsignal/10.23);
+if(disp_rampsignal < 10) {
+lcd_goto(0x4A);
+lcd_writesc(" ");
+lcd_goto(0x4B);
+lcd_write(0x30+disp_rampsignal);
+}
+else if(disp_rampsignal < 100) {
+lcd_goto(0x4A);
+lcd_writesc(" ");
+lcd_goto(0x4A);
+lcd_write(0x30+(disp_rampsignal/10));
+lcd_goto(0x4B);
+lcd_write(0x30+(disp_rampsignal%10));
 }
 
 
@@ -10194,6 +10254,14 @@ INTCON=0xC0;
 ADCON0=0b0101001;
 ADCON1=0b00000000;
 ADCON2=0b10100100;
+CM1CON0=0b10001100;
+
+CM2CON1=0b00100000;
+VREFCON0=0xF0;
+TXSTA1 = 0b00100100;
+RCSTA1 = 0b10000000;
+BAUDCON1 = 0b00000000;
+SPBRG1 = 12;
 }
 
 
@@ -10264,11 +10332,28 @@ return AD_value;
 
 void interrupt isr(void){
 if(PIR1bits.TMR1IF && PIE1bits.TMR1IE){
-TMR1H=0x3D;
-TMR1L=0x1D;
+TMR1H=0x3C;
+TMR1L=0xD6;
+if(++sample_interval >=16){
+sample_flag = 1;
+sample_interval = 0;
+}
+if(++ramptime_scaler >=2){
+if(rampknapp_flag == 0xFF && (rampsignal< pot_Val)){
+rampsignal += 1;
+}
+if(rampknapp_flag == 0xFF && (rampsignal> pot_Val)){
+rampsignal -= 1;
+}
+if(rampknapp_flag == 0xFF && (rampsignal == pot_Val)){
+rampsignal = rampsignal;
+}
+ramptime_scaler = 0;
+}
 if(++time_scaler>=20){
 time_scaler = 0;
 blink_battery = blink_battery + 1;
+
 if(++sekunder>=60){
 sekunder = 0;
 if(++minuter>=60){

@@ -8275,7 +8275,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;lcd.c: 124: lcd_goto(0x40);
 "124
 [e ( _lcd_goto (1 -> -> 64 `i `uc ]
-[; ;lcd.c: 125: lcd_writesc(" r:   %         ");
+[; ;lcd.c: 125: lcd_writesc(" r:   % R:  %  ");
 "125
 [e ( _lcd_writesc (1 :s 2C ]
 [; ;lcd.c: 126: lcd_goto(0x01);
@@ -8307,4 +8307,4 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :UE 1172 ]
 }
 [a 1C 98 32 114 58 32 32 37 32 48 48 58 48 48 58 48 48 0 ]
-[a 2C 32 114 58 32 32 32 37 32 32 32 32 32 32 32 32 32 0 ]
+[a 2C 32 114 58 32 32 32 37 32 82 58 32 32 37 32 32 0 ]

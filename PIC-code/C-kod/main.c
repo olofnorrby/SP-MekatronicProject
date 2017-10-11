@@ -38,10 +38,14 @@ void create_char(void);
     unsigned int sekunder=0;
     unsigned char blink_battery = 0;
     unsigned int styrsignal = 0;
-    unsigned int ramp_multiplier = 1;
-    unsigned char set_Val; //Börvärdet ("set") i procent, visas på LCDn och beseras på potentiometer
-    unsigned char act_Val; //Ärvärdet ("actual") i procent, visas på LCDn och baseras på nivågivare
+    unsigned int rampsignal = 0;
+    unsigned char set_Val = 0; //Börvärdet ("set") i procent, visas på LCDn och beseras på potentiometer
+    unsigned char act_Val = 0; //Ärvärdet ("actual") i procent, visas på LCDn och baseras på nivågivare
     bool rampknapp_flag = 0; //
+    unsigned int sample_flag = 0;
+    unsigned char sample_interval = 0;
+    unsigned int pot_Val = 0; //Börvärde direkt från potentiometer
+    unsigned char ramptime_scaler = 0;
 
 //Huvudprogram----------------------------------------------------------------
 void main()
@@ -54,22 +58,38 @@ void main()
     lcd_init();
     create_char();
 
-    unsigned char duty_MSB, duty_LSB;
-    unsigned int pot_Val; //Börvärde direkt från potentiometer
+    unsigned char duty_MSB, duty_LSB;    
     unsigned int sensor_Val; //Ärvärdet direkt från nivågivare
     unsigned int tid = 0; //Tid som gått i mikrosekunder;
     unsigned int tid_old = 0; //Tid vid senaste registrerade aktivering av rampknappen (Förhindrar fladder)
     bool battery_status = 1; //1: Batteri V >= 12V. 0: Batteri V < 12V
     char variabel = 0;
+    int res_error1 = 0;
+    int res_error2 = 0;
+    double pump_signal1 = 0;
+    double pump_signal2 = 0;
+    unsigned char disp_rampsignal = 0;
 
  
     while(1) //Huvudloop
     {
         //PWM ----------------------------------------------------------------
-        
+        styrsignal = (int)pump_signal1;
+        if(styrsignal >=1023){
+            styrsignal = 1023;
+        }
+        if(pump_signal1 <= -1023){
+            pump_signal1 = -1023;
+        }
+        if(pump_signal1 >= 1023){
+            pump_signal1 = 1023;
+        }
+        if(pump_signal1 < 0){
+           styrsignal += (int)pump_signal1;
+        }
         pot_Val = AD_omv(10); //pot_Value 0-1023
-        duty_MSB = pot_Val>>2; //8 MSB till duty_MSB
-        duty_LSB = pot_Val & 0x0003; //2 LSB till duty_LSB
+        duty_MSB = styrsignal>>2; //8 MSB till duty_MSB
+        duty_LSB = styrsignal & 0x0003; //2 LSB till duty_LSB
         CCPR5L = duty_MSB; //8 MSB till CCPR5L
         CCP5CON = (CCP5CON & 0b11001111)|(duty_LSB <<4); //Maska in 2 LSB
         sensor_Val = AD_omv(12); //sensor_Val 0-1023
@@ -79,6 +99,18 @@ void main()
         //Skriva 8-MSB till TXREG1
         variabel = sensor_Val>>2;
         TXREG1 = variabel;
+
+
+        //Regulator
+        if(sample_flag == 1){
+            pump_signal2 = pump_signal1;
+            res_error2 = res_error1;
+            res_error1 = rampsignal - sensor_Val; //Räknar ut kvarstående fel
+            pump_signal1=2.298*res_error1 - 2.266*res_error2 + pump_signal2;
+            sample_flag = 0;
+        }
+
+
 
         //Rampfunktion -------------------------------------------------------
         
@@ -156,24 +188,24 @@ void main()
             }
         }
 
-       //Styrvärde
+       //Rampvärde
         if(rampknapp_flag == 0){
-            styrsignal = set_Val;
+            rampsignal = pot_Val;
         }
-
-        if(styrsignal < 10) {
+        disp_rampsignal = (char)(rampsignal/10.23);
+        if(disp_rampsignal < 10) {
             lcd_goto(0x4A);
             lcd_writesc(" ");
             lcd_goto(0x4B);
-            lcd_write(0x30+styrsignal);
+            lcd_write(0x30+disp_rampsignal);
         }
-        else if(styrsignal < 100) {
+        else if(disp_rampsignal < 100) {
             lcd_goto(0x4A);
             lcd_writesc(" ");
             lcd_goto(0x4A);
-            lcd_write(0x30+(styrsignal/10));
+            lcd_write(0x30+(disp_rampsignal/10));
             lcd_goto(0x4B);
-            lcd_write(0x30+(styrsignal%10));
+            lcd_write(0x30+(disp_rampsignal%10));
         } 
 
 
@@ -229,11 +261,10 @@ void init()
                         //Speed=Normal, C1R=C1Cin+, C1CH=C12IN0-
     CM2CON1=0b00100000; //C1RSEL=FVR BUF1
     VREFCON0=0xF0; //Enabled, Fixed Reference = 4.096V, Flag = 1 (ready to use)
-    TXSTA1 = 0b00100000; //Asynkron, Low Speed, Transmit Enabled
+    TXSTA1 = 0b00100100; //Asynkron, High Speed, Transmit Enabled
     RCSTA1 = 0b10000000; //Serial Port Enabled
-    BAUDCON1 = 0b00001000; //BRG16 = 16-bit
-    SPBRG1 = 0; //LSB av 19200 (Baudrate)
-    SPBRGH1 = 0b01001011; //HSB av 19200 (Baudrate)
+    BAUDCON1 = 0b00000000; //BRG16 = 8-bit
+    SPBRG1 = 12; //19200 (Baudrate)
 }
 
 //Skapar nya symboler ----------------------------------------------------------
@@ -304,20 +335,28 @@ int AD_omv(char ADkanal)
 //Interupt-Klocka -------------------------------------------------------------
 void interrupt isr(void){
     if(PIR1bits.TMR1IF && PIE1bits.TMR1IE){
-        TMR1H=0x3D; //Återställer timer
-        TMR1L=0x1D;
+        TMR1H=0x3C; //Återställer timer
+        TMR1L=0xD6;
+        if(++sample_interval >=16){ //Sampletid = 0,8 sec
+            sample_flag = 1; // Updatera sampletid för regulatorn
+            sample_interval = 0;
+        }
+        if(++ramptime_scaler >=2){
+            if(rampknapp_flag == 0xFF && (rampsignal< pot_Val)){
+                rampsignal += 1;
+            }
+            if(rampknapp_flag == 0xFF && (rampsignal> pot_Val)){
+                rampsignal -= 1;
+            }
+            if(rampknapp_flag == 0xFF && (rampsignal == pot_Val)){
+                rampsignal = rampsignal;
+            }
+            ramptime_scaler = 0;
+        }
         if(++time_scaler>=20){ //Prescalear om tid så delay blir 1 sec
             time_scaler = 0;
             blink_battery = blink_battery + 1; //Blinktimer för "low battery"
-            if(rampknapp_flag == 0xFF && (styrsignal< set_Val)){
-                styrsignal += ramp_multiplier;
-            }
-            if(rampknapp_flag == 0xFF && (styrsignal> set_Val)){
-                styrsignal -= ramp_multiplier;
-            }
-            if(rampknapp_flag == 0xFF && (styrsignal == set_Val)){
-                styrsignal = styrsignal;
-            }
+            
             if(++sekunder>=60){ //Räkna sekunder
                 sekunder = 0;
                 if(++minuter>=60){//Räkna minuter
