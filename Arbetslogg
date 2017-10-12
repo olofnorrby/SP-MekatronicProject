@@ -86,3 +86,8 @@ Arbetspass 10:
 Olof och Johan:
 Började med KiCad modellen och rapporten.
 
+Arbetspass 11:
+Olof och Johan:
+Snyggade till C-koden, skapade funktioner som kallas på i Main. Testade regulatorn på riggen och fick rätt bra värden, 
+testade även lite andra parametrar till differensekv och en annan samplingstid på 0.6 sek som gjorde systemet mer aggresivt. Bytte tillbaka.
+
