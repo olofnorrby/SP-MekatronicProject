@@ -132,3 +132,175 @@ void lcd_init(void)
         lcd_goto(0x47);
         lcd_write(0xFF);
 }
+
+/* Skriver ut ramp-värdet på displayen*/
+void print_ramp_val(char flag, unsigned int signal, unsigned int potentiometer){
+           //Rampvärde
+
+        char disp_rampsignal = (char)(signal/10.23);
+        if(disp_rampsignal < 10) {
+            lcd_goto(0x4A);
+            lcd_writesc(" ");
+            lcd_goto(0x4B);
+            lcd_write(0x30+disp_rampsignal);
+        }
+        else if(disp_rampsignal < 100) {
+            lcd_goto(0x4A);
+            lcd_writesc(" ");
+            lcd_goto(0x4A);
+            lcd_write(0x30+(disp_rampsignal/10));
+            lcd_goto(0x4B);
+            lcd_write(0x30+(disp_rampsignal%10));
+        }
+}
+
+void print_battery(char comp_val, char* blink){
+    //Battery full
+        if(comp_val == 0) {
+            lcd_goto(0x4F);
+            lcd_write(0x00);
+        }
+
+        //Battery low ***********
+        if(comp_val == 1) {
+            if(*blink%2 == 1){
+                lcd_goto(0x4F);
+                lcd_write(0x01);
+                if(*blink >10)
+                    *blink = 1;
+            }
+            if(*blink%2 == 0){
+                lcd_goto(0x4F);
+                lcd_write(0x02);
+            }
+        }
+}
+
+//Skapar nya symboler ----------------------------------------------------------
+void create_char(void){
+    //Battery Full
+    lcd_char(0x00);
+    lcd_write(0b01110);
+    for(int i=1; i<=7; i++){
+        lcd_char(0x00+i);
+        lcd_write(0b11111);
+    }//*************
+
+    //Battery Low 1
+    lcd_char(0x08);
+    lcd_write(0b01110);
+    for(int i=1; i<6; i++){
+        lcd_char(0x08+i);
+        lcd_write(0b10001);
+    }
+    for(int i=6; i<8; i++){
+        lcd_char(0x08+i);
+        lcd_write(0b11111);
+    }//*************
+
+    //Battery Low 2
+    lcd_char(0x10);
+    lcd_write(0b01110);
+    for(int i=1; i<7; i++){
+        lcd_char(0x10+i);
+        lcd_write(0b10001);
+    }
+    lcd_char(0x17);
+    lcd_write(0b11111);
+    //*************
+
+    //Rampfunktion
+    lcd_char(0x18);
+    lcd_write(0x00);
+    lcd_char(0x19);
+    lcd_write(0x00);
+    lcd_char(0x1A);
+    lcd_write(0b00011);
+    lcd_char(0x1B);
+    lcd_write(0b00110);
+    lcd_char(0x1C);
+    lcd_write(0b01100);
+    lcd_char(0x1D);
+    lcd_write(0b11000);
+    lcd_char(0x1E);
+    lcd_write(0x00);
+    lcd_char(0x1F);
+    lcd_write(0x00);
+
+
+}
+
+/*Printar ut tiden på Displayen */
+void printTime(char sekunder, char minuter, char timmar)
+{
+    int i = 0;
+    int var = 0;
+    int pos1 = 0, pos2 = 0;
+    for(i=0; i<3; i++){
+        switch(i){
+                case 0:
+                    var = timmar;
+                    pos1 = 0x08;
+                    pos2 =0x09;
+                    break;
+                case 1:
+                    var = minuter;
+                    pos1 = 0x0B;
+                    pos2= 0x0C;
+                    break;
+                case 2:
+                    var = sekunder;
+                    pos1 = 0x0E;
+                    pos2 = 0x0F;
+                    break;
+        }
+        if(var < 10) { //Skriv ut '0' och sen ental
+            lcd_goto(pos1);
+            lcd_write('0');
+            lcd_goto(pos2);
+            lcd_write(0x30+var);
+        }
+        else { //Skriv ut först tiotal och sedan ental
+            lcd_goto(pos1);
+            lcd_write(0x30+(var/10));
+            lcd_goto(pos2);
+            lcd_write(0x30+(var%10));
+        }
+    }
+}
+
+void print_bor_ar(unsigned int pot_Val, unsigned int sensor_Val){
+            //Skriva börvärde
+        char set_Val = (char)(pot_Val/10.23);
+        if(set_Val < 10) {
+            lcd_goto(0x04);
+            lcd_writesc(" ");
+            lcd_goto(0x05);
+            lcd_write(0x30+set_Val);
+        }
+        else if(set_Val < 100) {
+            lcd_goto(0x04);
+            lcd_writesc(" ");
+            lcd_goto(0x04);
+            lcd_write(0x30+(set_Val/10));
+            lcd_goto(0x05);
+            lcd_write(0x30+(set_Val%10));
+        }
+
+        //Skriva ärvärde
+        char act_Val = (char)(sensor_Val/10.23);
+        if(act_Val < 10) {
+            lcd_goto(0x44);
+            lcd_writesc(" ");
+            lcd_goto(0x45);
+            lcd_write(0x30+act_Val);
+        }
+        else if(act_Val < 100) {
+            lcd_goto(0x44);
+            lcd_writesc(" ");
+            lcd_goto(0x44);
+            lcd_write(0x30+(act_Val/10));
+            lcd_goto(0x45);
+            lcd_write(0x30+(act_Val%10));
+        }
+}

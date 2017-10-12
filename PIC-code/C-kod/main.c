@@ -29,77 +29,89 @@
 void init(void);
 int AD_omv(char ADkanal);
 void interrupt isr(void);
-void printTime(char sekunder, char minuter, char timmar);
-void create_char(void);
+void klock_config();
+void print_ramp_symb();
+void pump_signal();
 
+//Globala Variabler
     unsigned int time_scaler=0;
     unsigned int timmar=0;
     unsigned int minuter=0;
     unsigned int sekunder=0;
-    unsigned char blink_battery = 0;
+    char blink_battery = 0;
     unsigned int styrsignal = 0;
     unsigned int rampsignal = 0;
     unsigned char set_Val = 0; //Börvärdet ("set") i procent, visas på LCDn och beseras på potentiometer
     unsigned char act_Val = 0; //Ärvärdet ("actual") i procent, visas på LCDn och baseras på nivågivare
-    bool rampknapp_flag = 0; //
-    unsigned int sample_flag = 0;
-    unsigned char sample_interval = 0;
+    bool rampknapp_flag = 0; //Flagga för att toggla värdet på rampknappen
+    unsigned int sample_flag = 0;   //Flagga som sätts då sample interval räknat till 0.8 sek
+    unsigned char sample_interval = 0; //Räknar upp intervall till 0.8 sek.
     unsigned int pot_Val = 0; //Börvärde direkt från potentiometer
+    unsigned int sensor_Val; //Ärvärdet direkt från nivågivare
     unsigned char ramptime_scaler = 0;
+    unsigned int tid = 0; //Tid som gått i mikrosekunder;
+    unsigned int tid_old = 0; //Tid vid senaste registrerade aktivering av rampknappen (Förhindrar fladder)
+    unsigned char duty_MSB, duty_LSB;
+    bool battery_status = 1; //1: Batteri V >= 12V. 0: Batteri V < 12V
+    int res_error1 = 0; //Felet mellan är och börvärde
+    int res_error2 = 0; //Tidigare felet mellan är och börvärde
+    double pump_signal1 = 0; //
+    double pump_signal2 = 0;
 
+
+    
 //Huvudprogram----------------------------------------------------------------
 void main()
 {
-    // LCD
-    char ASCII_string[4];
-    unsigned char character_code=0;
 
-    init();
-    lcd_init();
-    create_char();
+    init();         //initierar Register
+    lcd_init();     //Initierar LCD
+    create_char();  //initiering av att skapa nya tecken
 
-    unsigned char duty_MSB, duty_LSB;    
-    unsigned int sensor_Val; //Ärvärdet direkt från nivågivare
-    unsigned int tid = 0; //Tid som gått i mikrosekunder;
-    unsigned int tid_old = 0; //Tid vid senaste registrerade aktivering av rampknappen (Förhindrar fladder)
-    bool battery_status = 1; //1: Batteri V >= 12V. 0: Batteri V < 12V
-    char variabel = 0;
-    int res_error1 = 0;
-    int res_error2 = 0;
-    double pump_signal1 = 0;
-    double pump_signal2 = 0;
-    unsigned char disp_rampsignal = 0;
-
- 
+  
     while(1) //Huvudloop
     {
-        //PWM ----------------------------------------------------------------
-        styrsignal = (int)pump_signal1;
-        if(styrsignal >=1023){
-            styrsignal = 1023;
+        //PWM funktion
+        pump_signal();
+
+        //Uppdatering av tidsvariabel som är till för att förhindra fladder med knappar
+        __delay_us(0.5);
+        tid += 1;
+        
+        //Skriva 8-MSB till TXREG1 (Simulink)
+        TXREG1 = sensor_Val>>2;
+
+        //rampsignalen är samma som börvärdet då rampflaggan är släkt.
+        if(rampknapp_flag == 0){
+            rampsignal = pot_Val;
         }
-        if(pump_signal1 <= -1023){
-            pump_signal1 = -1023;
+
+        //Skriver ut önskade värden/symboler på displayen
+        print_ramp_val(rampknapp_flag, rampsignal, pot_Val);
+        print_ramp_symb();
+        print_bor_ar(pot_Val, sensor_Val);
+        print_battery(CM1CON0bits.C1OUT, blink_battery);
+
+        //Ställer klockan
+        klock_config();
+    }
+}
+
+void pump_signal(){
+        if(pump_signal1 <= 0){  //Begränsar styrsignalen >=0
+            pump_signal1 = 0;
         }
-        if(pump_signal1 >= 1023){
+        if(pump_signal1 >= 1023){   //Begränsar styrsignalen <= 1023
             pump_signal1 = 1023;
         }
-        if(pump_signal1 < 0){
-           styrsignal += (int)pump_signal1;
-        }
+        styrsignal = (int)pump_signal1; //uppdaterar styrvärdet
+
         pot_Val = AD_omv(10); //pot_Value 0-1023
         duty_MSB = styrsignal>>2; //8 MSB till duty_MSB
         duty_LSB = styrsignal & 0x0003; //2 LSB till duty_LSB
         CCPR5L = duty_MSB; //8 MSB till CCPR5L
         CCP5CON = (CCP5CON & 0b11001111)|(duty_LSB <<4); //Maska in 2 LSB
         sensor_Val = AD_omv(12); //sensor_Val 0-1023
-        __delay_us(0.5);
-        tid += 1;
-        
-        //Skriva 8-MSB till TXREG1
-        variabel = sensor_Val>>2;
-        TXREG1 = variabel;
-
 
         //Regulator
         if(sample_flag == 1){
@@ -109,12 +121,10 @@ void main()
             pump_signal1=2.298*res_error1 - 2.266*res_error2 + pump_signal2;
             sample_flag = 0;
         }
+}
 
-
-
-        //Rampfunktion -------------------------------------------------------
-        
-        if(Ramp_knapp && tid >= (tid_old+50)) {
+void print_ramp_symb(){
+    if(Ramp_knapp && tid >= (tid_old+50)) {
 
             //Skriver ut rampsymbol till Display
             rampknapp_flag = ~rampknapp_flag;
@@ -129,88 +139,10 @@ void main()
             lcd_goto(0x4E);
             lcd_write(0x20);
         }
-        
-        //LCD ----------------------------------------------------------------
-        //Skriva börvärde
-        set_Val = (char)(pot_Val/10.23);
-        if(set_Val < 10) {
-            lcd_goto(0x04);
-            lcd_writesc(" ");
-            lcd_goto(0x05);
-            lcd_write(0x30+set_Val);
-        }
-        else if(set_Val < 100) {
-            lcd_goto(0x04);
-            lcd_writesc(" ");
-            lcd_goto(0x04);
-            lcd_write(0x30+(set_Val/10));
-            lcd_goto(0x05);
-            lcd_write(0x30+(set_Val%10));
-        }
+}
 
-        //Skriva ärvärde
-        act_Val = (char)(sensor_Val/10.23);
-        if(act_Val < 10) {
-            lcd_goto(0x44);
-            lcd_writesc(" ");
-            lcd_goto(0x45);
-            lcd_write(0x30+act_Val);
-        }
-        else if(act_Val < 100) {
-            lcd_goto(0x44);
-            lcd_writesc(" ");
-            lcd_goto(0x44);
-            lcd_write(0x30+(act_Val/10));
-            lcd_goto(0x45);
-            lcd_write(0x30+(act_Val%10));
-        }
-
-
-        //Skriva egna tecken -------------------------------------------------
-
-        //Battery full
-        if(CM1CON0bits.C1OUT == 0) {
-            lcd_goto(0x4F);
-            lcd_write(0x00);
-        }
-
-        //Battery low ***********
-        if(CM1CON0bits.C1OUT == 1) {
-            if(blink_battery%2 == 1){
-                lcd_goto(0x4F);
-                lcd_write(0x01);
-                if(blink_battery >10)
-                    blink_battery = 1;
-            }
-            if(blink_battery%2 == 0){
-                lcd_goto(0x4F);
-                lcd_write(0x02);
-            }
-        }
-
-       //Rampvärde
-        if(rampknapp_flag == 0){
-            rampsignal = pot_Val;
-        }
-        disp_rampsignal = (char)(rampsignal/10.23);
-        if(disp_rampsignal < 10) {
-            lcd_goto(0x4A);
-            lcd_writesc(" ");
-            lcd_goto(0x4B);
-            lcd_write(0x30+disp_rampsignal);
-        }
-        else if(disp_rampsignal < 100) {
-            lcd_goto(0x4A);
-            lcd_writesc(" ");
-            lcd_goto(0x4A);
-            lcd_write(0x30+(disp_rampsignal/10));
-            lcd_goto(0x4B);
-            lcd_write(0x30+(disp_rampsignal%10));
-        } 
-
-
-
-        //Konfig av Klocka------------------------------------------------------
+void klock_config(){
+            //Konfig av Klocka------------------------------------------------------
         if(CLK_knapp0 && tid >= (tid_old+50)) {//Sätter timmar
             timmar += 1;
             tid_old = tid;
@@ -223,7 +155,7 @@ void main()
             sekunder = 0;
             tid_old = tid;
         }
-        
+
         if(CLK_knapp1 && CLK_knapp2 == 1){//Nollställer sek, min och tim.
             sekunder = 0;
             minuter = 0;
@@ -231,7 +163,6 @@ void main()
         }
 
         printTime(sekunder,minuter,timmar); //Skriver ut tiden på Displayen
-    }
 }
 
 //Initieringar----------------------------------------------------------------
@@ -267,59 +198,7 @@ void init()
     SPBRG1 = 12; //19200 (Baudrate)
 }
 
-//Skapar nya symboler ----------------------------------------------------------
-void create_char(void){ 
-    //Battery Full
-    lcd_char(0x00);
-    lcd_write(0b01110);
-    for(int i=1; i<=7; i++){
-        lcd_char(0x00+i);
-        lcd_write(0b11111);
-    }//*************
 
-    //Battery Low 1
-    lcd_char(0x08);
-    lcd_write(0b01110);
-    for(int i=1; i<6; i++){
-        lcd_char(0x08+i);
-        lcd_write(0b10001);
-    }
-    for(int i=6; i<8; i++){
-        lcd_char(0x08+i);
-        lcd_write(0b11111);
-    }//*************
-
-    //Battery Low 2
-    lcd_char(0x10);
-    lcd_write(0b01110);
-    for(int i=1; i<7; i++){
-        lcd_char(0x10+i);
-        lcd_write(0b10001);
-    }
-    lcd_char(0x17);
-    lcd_write(0b11111);
-    //*************
-
-    //Rampfunktion 
-    lcd_char(0x18);
-    lcd_write(0x00);
-    lcd_char(0x19);
-    lcd_write(0x00);
-    lcd_char(0x1A);
-    lcd_write(0b00011);
-    lcd_char(0x1B);
-    lcd_write(0b00110);
-    lcd_char(0x1C);
-    lcd_write(0b01100);
-    lcd_char(0x1D);
-    lcd_write(0b11000);
-    lcd_char(0x1E);
-    lcd_write(0x00);
-    lcd_char(0x1F);
-    lcd_write(0x00);
-   
-    
-}
 //AD-omvandlings funktion ------------------------------------------------------
 int AD_omv(char ADkanal)
 {
@@ -343,13 +222,13 @@ void interrupt isr(void){
         }
         if(++ramptime_scaler >=2){
             if(rampknapp_flag == 0xFF && (rampsignal< pot_Val)){
-                rampsignal += 1;
+                rampsignal += 1; //Rampsignal ökar med 1% per sekund
             }
             if(rampknapp_flag == 0xFF && (rampsignal> pot_Val)){
-                rampsignal -= 1;
+                rampsignal -= 3; //Rampsignal minskar med 3% per sekund
             }
             if(rampknapp_flag == 0xFF && (rampsignal == pot_Val)){
-                rampsignal = rampsignal;
+                rampsignal = rampsignal; //Rampsignalen stannar på detta värde
             }
             ramptime_scaler = 0;
         }
@@ -368,45 +247,4 @@ void interrupt isr(void){
         }
         PIR1bits.TMR1IF = 0;    //Nollställer Interruptflagga
     }
-}
-
-//Printar ut tiden på Displayen ------------------------------------------------
-void printTime(char sekunder, char minuter, char timmar)
-{
-    int i = 0;
-    int var = 0;
-    int pos1 = 0, pos2 = 0;
-    for(i=0; i<3; i++){
-        switch(i){
-                case 0:
-                    var = timmar;
-                    pos1 = 0x08;
-                    pos2 =0x09;
-                    break;
-                case 1:
-                    var = minuter;
-                    pos1 = 0x0B;
-                    pos2= 0x0C;
-                    break;
-                case 2:
-                    var = sekunder;
-                    pos1 = 0x0E;
-                    pos2 = 0x0F;
-                    break;
-        }
-        if(var < 10) { //Skriv ut '0' och sen ental
-            lcd_goto(pos1);
-            lcd_write('0');
-            lcd_goto(pos2);
-            lcd_write(0x30+var);
-        }
-        else { //Skriv ut först tiotal och sedan ental
-            lcd_goto(pos1);
-            lcd_write(0x30+(var/10));
-            lcd_goto(pos2);
-            lcd_write(0x30+(var%10));
-        }
-    }
-
-
 }
