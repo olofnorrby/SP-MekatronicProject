@@ -40,7 +40,7 @@ void pump_signal();
     unsigned int sekunder=0;
     char blink_battery = 0;
     unsigned int styrsignal = 0;
-    unsigned int rampsignal = 0;
+    double rampsignal = 0;
     unsigned char set_Val = 0; //Börvärdet ("set") i procent, visas på LCDn och beseras på potentiometer
     unsigned char act_Val = 0; //Ärvärdet ("actual") i procent, visas på LCDn och baseras på nivågivare
     bool rampknapp_flag = 0; //Flagga för att toggla värdet på rampknappen
@@ -53,8 +53,8 @@ void pump_signal();
     unsigned int tid_old = 0; //Tid vid senaste registrerade aktivering av rampknappen (Förhindrar fladder)
     unsigned char duty_MSB, duty_LSB;
     bool battery_status = 1; //1: Batteri V >= 12V. 0: Batteri V < 12V
-    int res_error1 = 0; //Felet mellan är och börvärde
-    int res_error2 = 0; //Tidigare felet mellan är och börvärde
+    double res_error1 = 0; //Felet mellan är och börvärde
+    double res_error2 = 0; //Tidigare felet mellan är och börvärde
     double pump_signal1 = 0; //
     double pump_signal2 = 0;
 
@@ -78,13 +78,8 @@ void main()
         __delay_us(0.5);
         tid += 1;
         
-        //Skriva 8-MSB till TXREG1 (Simulink)
-        TXREG1 = sensor_Val>>2;
 
-        //rampsignalen är samma som börvärdet då rampflaggan är släkt.
-        if(rampknapp_flag == 0){
-            rampsignal = pot_Val;
-        }
+
 
         //Skriver ut önskade värden/symboler på displayen
         print_ramp_val(rampknapp_flag, rampsignal, pot_Val);
@@ -117,7 +112,7 @@ void pump_signal(){
         if(sample_flag == 1){
             pump_signal2 = pump_signal1;
             res_error2 = res_error1;
-            res_error1 = rampsignal - sensor_Val; //Räknar ut kvarstående fel
+            res_error1 = rampsignal - (double)sensor_Val; //Räknar ut kvarstående fel
             pump_signal1=2.298*res_error1 - 2.266*res_error2 + pump_signal2;
             sample_flag = 0;
         }
@@ -219,18 +214,17 @@ void interrupt isr(void){
         if(++sample_interval >=16){ //Sampletid = 0,8 sec
             sample_flag = 1; // Updatera sampletid för regulatorn
             sample_interval = 0;
-        }
-        if(++ramptime_scaler >=2){
-            if(rampknapp_flag == 0xFF && (rampsignal< pot_Val)){
-                rampsignal += 1; //Rampsignal ökar med 1% per sekund
+        
+            if(rampknapp_flag == 0xFF && (rampsignal< (double)pot_Val)){
+                rampsignal += 7.0; //Rampsignal ökar per 0.8 sek
             }
-            if(rampknapp_flag == 0xFF && (rampsignal> pot_Val)){
-                rampsignal -= 3; //Rampsignal minskar med 3% per sekund
+            //rampsignalen är samma som börvärdet då rampflaggan är släkt.
+            if((rampknapp_flag == 0) || (rampsignal>= (double)pot_Val)){
+                rampsignal = (double)pot_Val;
             }
-            if(rampknapp_flag == 0xFF && (rampsignal == pot_Val)){
-                rampsignal = rampsignal; //Rampsignalen stannar på detta värde
-            }
-            ramptime_scaler = 0;
+            //Skriva 8-MSB till TXREG1 (Simulink)
+            TXREG1 = sensor_Val>>2;
+
         }
         if(++time_scaler>=20){ //Prescalear om tid så delay blir 1 sec
             time_scaler = 0;
