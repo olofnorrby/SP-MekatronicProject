@@ -1,0 +1,40 @@
+/* PWM-generering */
+//Headerfiler----------------------------------------------------------------
+#include <xc.h> //Definition av register och registerbitar.
+//Se pic18f25k22.h i kompilatorns include catalog
+//C:\Program Files\Microchip\xc8\Vx.xx\include
+//Configuration Bits---------------------------------------------------------
+#pragma config FOSC=XT, FCMEN=OFF //Extern Oscillator, FailSafe disabled
+#pragma config HFOFST=OFF //Delay until fosc stable
+#pragma config PLLCFG=OFF, IESO=OFF //PLL Off, Osc switchover disabled
+#pragma config PRICLKEN=ON //Primary clock enabled
+#pragma config PWRTEN=ON, BOREN=OFF //Power-Up timer enabled, BOR off
+#pragma config MCLRE=EXTMCLR, XINST=OFF//MCLR extern, I-set extension disabled
+#pragma config WDTEN=OFF, LVP=OFF //Watchdog timer & Low Volt prog disabled
+#pragma config DEBUG=OFF, STVREN=ON //Stack Full/Underflow will cause Reset
+//Funktionsprototyper---------------------------------------------------------
+void init(void);
+//Huvudprogram----------------------------------------------------------------
+void main()
+{ unsigned int duty_cycle;
+unsigned char duty_MSB, duty_LSB;
+init(); //Initieringar
+while(1) //Huvudloop
+{ duty_cycle=512; //Duty cycle 0-1023
+duty_MSB=duty_cycle>>2; //8 MSB till duty_MSB
+duty_LSB=duty_cycle & 0x0003; //2 LSB till duty_LSB
+CCPR5L=duty_MSB; //8 MSB till CCPR5L
+CCP5CON=(CCP5CON & 0b11001111)|(duty_LSB <<4); //Maska in 2 LSB
+}
+}
+//Initieringar----------------------------------------------------------------
+void init()
+{ ANSELA=0; //PortA alla digitala
+ANSELB=0; //PortB alla digitala
+TRISB=0b00000000; //PORTB utgångar
+TRISAbits.TRISA4=0; //CCP5pin = PWM-utgång
+CCP5CON=0b00001100; //PWM-mode, 2LSbs för PWM=00
+CCPTMRS1=0b00000001; //CCP5 använder Timer2
+PR2=0xFF; //PWM-period=256us om Fosc=4MHz och prescaler=1
+T2CON=0x04; //Timer2=on, prescaler=1
+}

@@ -1,0 +1,27 @@
+___awdiv: CODE, 6100 0 164
+_init: CODE, 6408 0 118
+___flmul: CODE, 4310 0 316
+__stringdata: SMALLCONST, 1537 0 33
+_lcd_cmd: CODE, 6998 0 14
+_AD_omv: CODE, 6706 0 70
+___fltol: CODE, 5198 0 254
+___flge: CODE, 5916 0 184
+___awmod: CODE, 6264 0 144
+_main: CODE, 1572 0 1906
+___fldiv: CODE, 4912 0 286
+___lwtofl: CODE, 6868 0 42
+___flneg: CODE, 6776 0 50
+_create_char: CODE, 3990 0 320
+_lcd_char: CODE, 6982 0 16
+__initialization: CODE, 6910 0 20
+_lcd_clear: CODE, 6940 0 26
+_lcd_goto: CODE, 6966 0 16
+___flpack: CODE, 5452 0 248
+_isr: CODE, 8 0 370
+___fladd: CODE, 3478 0 512
+_lcd_write: CODE, 6526 0 104
+_lcd_writesc: CODE, 6826 0 42
+_printTime: CODE, 4626 0 286
+___awtofl: CODE, 6630 0 76
+_lcd_init: CODE, 5700 0 216
+Total: 5833

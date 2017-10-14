@@ -1,0 +1,38 @@
+/* Blinka lysdiod på ben RB0 i PORTB */
+//Headerfiler----------------------------------------------------------------
+#include <xc.h> //Definition av register och registerbitar.
+//Se pic18f25k22.h i kompilatorns include catalog
+//C:\Program Files\Microchip\xc8\Vx.xx\include
+//Configuration Bits---------------------------------------------------------
+#pragma config FOSC=XT, FCMEN=OFF //Extern Oscillator, FailSafe disabled
+#pragma config HFOFST=OFF //Delay until fosc stable
+#pragma config PLLCFG=OFF, IESO=OFF //PLL Off, Osc switchover disabled
+#pragma config PRICLKEN=ON //Primary clock enabled
+#pragma config PWRTEN=ON, BOREN=OFF //Power-Up timer enabled, BOR off
+#pragma config MCLRE=EXTMCLR, XINST=OFF//MCLR extern, I-set extension disabled
+#pragma config WDTEN=OFF, LVP=OFF //Watchdog timer & Low Volt prog disabled
+#pragma config DEBUG=OFF, STVREN=ON //Stack Full/Underflow will cause Reset
+//Definitioner av konstanter-------------------------------------------------
+#define _XTAL_FREQ 4000000 //Klockoscillatorfrekvens Fosc=4 MHz
+//Krävs för macro ?__delay_us(x)?
+//respektive ?__delay_ms(x)?
+//Funktionsprototyper---------------------------------------------------------
+void init(void);
+//Huvudprogram----------------------------------------------------------------
+void main()
+{
+init(); //Initieringar
+while(1) //Huvudloop
+{ LATBbits.LATB0=0; // Bit0 PORTB=0
+__delay_ms(170); // Delay 0.17 s
+LATBbits.LATB0=1; // Bit0 PORTB=1
+__delay_ms(170); // Delay 0.17 s
+}
+}
+//Initieringar----------------------------------------------------------------
+void init()
+{ ANSELA=0; //PortA alla digitala
+ANSELB=0; //PortB alla digitala
+TRISA=0b00000000; //PORTA utgångar
+TRISB=0b00000000; //PORTB utgångar
+}

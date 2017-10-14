@@ -24,3 +24,70 @@ Arbetspass 2:
 		datasignalen istället.
 	Har laddat ner datablad för MAX232, PIC och 78L05 och laddat upp dom till GitHub
 	
+Arbetspass 3:
+La in våra stegsvar i matlab och plottade dem över de uppmätta stegsvaren. Success!
+Skapade ett bodediagram för Gp och försökte hitta fasmarginal=50. Vi trodde att vi hade hittat den men vid simulation så såg vi att systemet
+självsvängde. Detta visade sig vara pga att vår Gk överföring hade en fasmarginal på 32 grader som ligger väldigt nära självsvängning/ostabilt
+system. 
+Vi började testa olika förstärkningar för att ta reda på åt vilket håll i ska gå. Nästa gång ska vi göra en ny regulator mha bode-metoden.
+
+Olof o Johan:
+Kopplade upp 0-5V -> 0-10V OP amp samt räknade ut värden på gain-resistorer.
+Kopplade upp Börvärdes-potentiometern.
+Kopplade upp 10V -> 5V OP amp från nivågivare till PIC-processor.
+Räknade ut R och C för LP-filtret för DA-utgången som "smoothar ut" PWM-signalen till en analog signal.
+
+Arbetspass 4:
+Olof o Johan:
+Kopplat upp LCD-display.
+Lagt till kondensatorer till 78L05.
+Vändt kondensatorer runt MAX232-ICn åt rätt håll (derp).
+Skrivit men inte testat ett program som läser in en analog signal från en potentiometer på RB1 och översätter den till en PWM-signal
+på RA4.
+Utvecklat ett brinnande hat för datablad och register.
+
+Arbetspass 5:
+Johan o Olof:
+Skrev kod som anpassar en PWM-utsignal efter ett börvärde från en potentiometer.
+Kopplade upp så att man kan programmera PIC-processorn utan att behöva trycka på MSCL-knappen, detta genom att löda på en extra
+sladd på RTS-pinnen på DSUBen och koppla in denna i MSCL-kretsen enl. sista sidan i kompendiet.
+Skrev kod som skriver ut börvärdet (från en potentiometer) på LCD-skärmen i procent. Kodade även en design för hur börvärde ärvärde
+klocka och batterisymbol skulle vara placerade på LCD-skärmen.
+
+Arbetspass 6 (Extra):
+Johan o Olof:
+Skrivit kod för "kristall-klockan" som går på timer 1, 1mhz. Fick kompensera för delayer i koden osv så delayen vi anv i slutändan var 0.05 sec.
+Skrivit kod för 3 olika egna symboler (rampfunktion, battery low (2st olika symboler) Battery Full).
+Fixat blinkfunktion för low battery mha. interupten
+Knapp kopplat till rampsymbolen
+fixat funktionen som nollställer hela klockan.
+AD omv för RB0 aka sensor fixat och testad. (glömde sätta i nollan för testet ^^)
+
+Arbetspass 7:
+Olof och Johan:
+LCD helt klar. Rampfunktion och batteristatus fungerar perfekt och den visar ett "S: X%" där X är det stegande börvärdet (bör bytas namn
+på "S" kanske)
+Påbörjat kod för seriell kommunikation med MatLab
+
+Arbetspass 8:
+Olof och Johan:
+Kod för seriell kommunikation med matlab klar. lite problem med att ställa in rätt baudrate(19200) för 4MHz, fick ändra lite i 3 register för
+att lösa problemet. 
+Implementera samplingsinervall på 0,8 sek för differensekv.
+skrev kod för PI regulatorn, fick begränsa styrsignalerna så dem inte stack iväg på stora och stort negativa tal. Samt overflow problem.
+
+Arbetspass 9:
+Olof och Johan:
+Finslipade koden för regulatorn efter test på tankprocessen. 
+Problem med implementering av rampfunktion, men verkade lösa sig hyfsat bra efter lite pillande i koden.
+Testade på systemet och det sköter sig typ efter förväntningar.
+
+Arbetspass 10:
+Olof och Johan:
+Började med KiCad modellen och rapporten.
+
+Arbetspass 11:
+Olof och Johan:
+Snyggade till C-koden, skapade funktioner som kallas på i Main. Testade regulatorn på riggen och fick rätt bra värden, 
+testade även lite andra parametrar till differensekv och en annan samplingstid på 0.6 sek som gjorde systemet mer aggresivt. Bytte tillbaka.
+
